@@ -16,5 +16,12 @@ namespace VLegalizer.Web.Data
 
         public DbSet<EmployeeEntity> Employees { get; set; }
 
+        public DbSet<TripEntity> Trips { get; set; }
+
+        public DbSet<TripDetailEntity> TripDetails { get; set; }
+
+        public DbSet<ExpenseTypeEntity> ExpenseTypes { get; set; }
+
+
     }
 }

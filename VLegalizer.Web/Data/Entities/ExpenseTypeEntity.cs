@@ -15,6 +15,6 @@ namespace VLegalizer.Web.Data.Entities
         [Required(ErrorMessage = "The field {0} is mandatory.")]
         public string ExpenseNames { get; set; }
 
-        public ICollection<TripDetailEntity> TripDetail { get; set; }
+        public TripDetailEntity TripDetail { get; set; }
     }
 }

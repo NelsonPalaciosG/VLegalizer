@@ -24,11 +24,11 @@ namespace VLegalizer.Web.Data.Entities
 
         public DateTime EndDateLocal => EndDate.ToLocalTime();
 
-        //public int readonly TotalAmount => $"{FirstName} {LastName} - {Document}";
+        public int TotalAmount { get; set; }
 
         public string City { get; set; }
 
-        public ICollection<EmployeeEntity> Employee { get; set; }
+        public EmployeeEntity Employee { get; set; }
 
         public ICollection<TripDetailEntity> TripDetails { get; set; }
     }

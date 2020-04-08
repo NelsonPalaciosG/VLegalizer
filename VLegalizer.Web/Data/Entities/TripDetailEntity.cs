@@ -11,20 +11,20 @@ namespace VLegalizer.Web.Data.Entities
         public int Id { get; set; }
 
         [DataType(DataType.DateTime)]
-        [Display(Name = "Start Date")]
+        [Display(Name = "Date")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm}", ApplyFormatInEditMode = false)]
         public DateTime Date { get; set; }
 
         public DateTime DateLocal => Date.ToLocalTime();
 
-        public int Amount { get; set; }
-
         public string Description { get; set; }
+
+        public int Amount { get; set; }
 
         [Display(Name = "Picture")]
         public string PicturePath { get; set; }
         
-        public ICollection<TripEntity> Trip { get; set; }
+        public TripEntity Trip { get; set; }
 
         public ICollection<ExpenseTypeEntity> ExpenseTypes { get; set; }
     }
