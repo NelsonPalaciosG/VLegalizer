@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 using VLegalizer.Common.Enums;
 
 namespace VLegalizer.Web.Data.Entities
@@ -43,6 +40,7 @@ namespace VLegalizer.Web.Data.Entities
         public string FullNameWithDocument => $"{FirstName} {LastName} - {Document}";
 
         public ICollection<TripEntity> Trips { get; set; }
+
         public UserType UserType { get; internal set; }
     }
 }

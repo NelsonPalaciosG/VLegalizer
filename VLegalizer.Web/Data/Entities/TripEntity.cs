@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace VLegalizer.Web.Data.Entities
 {
@@ -24,11 +22,11 @@ namespace VLegalizer.Web.Data.Entities
 
         public DateTime EndDateLocal => EndDate.ToLocalTime();
 
-        public int TotalAmount { get; set; }
-
         public string City { get; set; }
 
         public EmployeeEntity Employee { get; set; }
+
+        //public virtual ICollection<TripDetailEntity> TripDetails { get; set; }
 
         public ICollection<TripDetailEntity> TripDetails { get; set; }
     }

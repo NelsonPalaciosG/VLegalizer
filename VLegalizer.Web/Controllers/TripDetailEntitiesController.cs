@@ -10,29 +10,22 @@ using VLegalizer.Web.Data.Entities;
 
 namespace VLegalizer.Web.Controllers
 {
-    public class TripEntitiesController : Controller
+    public class TripDetailEntitiesController : Controller
     {
         private readonly DataContext _context;
 
-        public TripEntitiesController(DataContext context)
+        public TripDetailEntitiesController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: TripEntities
-        public async Task<IActionResult> Index()
+        // GET: TripDetailEntities
+        public async Task<IActionResult> Index(int id)
         {
-            return View(await _context.Trips.Include(t => t.Employee).Include(t => t.TripDetails).Select(t => new TripEntity()
-            {
-                Id = t.Id,
-                City = t.City,
-                EndDate = t.EndDate,
-                StartDate = t.StartDate,
-                Employee = t.Employee
-            }).ToListAsync());
+            return View(await _context.TripDetails.Include(td => td.Trip).Where(td => td.Trip.Id == id).ToListAsync());
         }
 
-        // GET: TripEntities/Details/5
+        // GET: TripDetailEntities/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -40,40 +33,39 @@ namespace VLegalizer.Web.Controllers
                 return NotFound();
             }
 
-            var tripEntity = await _context.Trips
-                .Include(t=> t.TripDetails).ThenInclude(td => td.ExpenseType)
+            var tripDetailEntity = await _context.TripDetails
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (tripEntity == null)
+            if (tripDetailEntity == null)
             {
                 return NotFound();
             }
 
-            return View(tripEntity);
+            return View(tripDetailEntity);
         }
 
-        // GET: TripEntities/Create
+        // GET: TripDetailEntities/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: TripEntities/Create
+        // POST: TripDetailEntities/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,StartDate,EndDate,TotalAmount,City")] TripEntity tripEntity)
+        public async Task<IActionResult> Create([Bind("Id,Date,Description,Amount,PicturePath")] TripDetailEntity tripDetailEntity)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tripEntity);
+                _context.Add(tripDetailEntity);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(tripEntity);
+            return View(tripDetailEntity);
         }
 
-        // GET: TripEntities/Edit/5
+        // GET: TripDetailEntities/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,22 +73,22 @@ namespace VLegalizer.Web.Controllers
                 return NotFound();
             }
 
-            var tripEntity = await _context.Trips.FindAsync(id);
-            if (tripEntity == null)
+            var tripDetailEntity = await _context.TripDetails.FindAsync(id);
+            if (tripDetailEntity == null)
             {
                 return NotFound();
             }
-            return View(tripEntity);
+            return View(tripDetailEntity);
         }
 
-        // POST: TripEntities/Edit/5
+        // POST: TripDetailEntities/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,StartDate,EndDate,TotalAmount,City")] TripEntity tripEntity)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Date,Description,Amount,PicturePath")] TripDetailEntity tripDetailEntity)
         {
-            if (id != tripEntity.Id)
+            if (id != tripDetailEntity.Id)
             {
                 return NotFound();
             }
@@ -105,12 +97,12 @@ namespace VLegalizer.Web.Controllers
             {
                 try
                 {
-                    _context.Update(tripEntity);
+                    _context.Update(tripDetailEntity);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TripEntityExists(tripEntity.Id))
+                    if (!TripDetailEntityExists(tripDetailEntity.Id))
                     {
                         return NotFound();
                     }
@@ -121,10 +113,10 @@ namespace VLegalizer.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(tripEntity);
+            return View(tripDetailEntity);
         }
 
-        // GET: TripEntities/Delete/5
+        // GET: TripDetailEntities/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -132,30 +124,30 @@ namespace VLegalizer.Web.Controllers
                 return NotFound();
             }
 
-            var tripEntity = await _context.Trips
+            var tripDetailEntity = await _context.TripDetails
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (tripEntity == null)
+            if (tripDetailEntity == null)
             {
                 return NotFound();
             }
 
-            return View(tripEntity);
+            return View(tripDetailEntity);
         }
 
-        // POST: TripEntities/Delete/5
+        // POST: TripDetailEntities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tripEntity = await _context.Trips.FindAsync(id);
-            _context.Trips.Remove(tripEntity);
+            var tripDetailEntity = await _context.TripDetails.FindAsync(id);
+            _context.TripDetails.Remove(tripDetailEntity);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TripEntityExists(int id)
+        private bool TripDetailEntityExists(int id)
         {
-            return _context.Trips.Any(e => e.Id == id);
+            return _context.TripDetails.Any(e => e.Id == id);
         }
     }
 }

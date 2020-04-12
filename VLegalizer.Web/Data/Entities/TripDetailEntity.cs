@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace VLegalizer.Web.Data.Entities
 {
@@ -23,9 +21,11 @@ namespace VLegalizer.Web.Data.Entities
 
         [Display(Name = "Picture")]
         public string PicturePath { get; set; }
-        
+
         public TripEntity Trip { get; set; }
 
-        public ICollection<ExpenseTypeEntity> ExpenseTypes { get; set; }
+        //public virtual ExpenseTypeEntity ExpenseType { get; set; }
+
+        public ExpenseTypeEntity ExpenseType { get; set; }
     }
 }

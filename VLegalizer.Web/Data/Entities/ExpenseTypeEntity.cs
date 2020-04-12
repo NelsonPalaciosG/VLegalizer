@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace VLegalizer.Web.Data.Entities
 {
@@ -15,6 +12,6 @@ namespace VLegalizer.Web.Data.Entities
         [Required(ErrorMessage = "The field {0} is mandatory.")]
         public string ExpenseNames { get; set; }
 
-        public TripDetailEntity TripDetail { get; set; }
+        public ICollection<TripDetailEntity> TripDetails { get; set; }
     }
 }
