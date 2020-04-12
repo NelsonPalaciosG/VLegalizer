@@ -26,7 +26,6 @@ namespace VLegalizer.Web.Data
             await CheckRolesAsync();
             EmployeeEntity admin = await CheckEmployeeAsync("1026146086", "Nelson", "Palacios", "nelsonpalacios98055@correo.itm.edu.co", "230 34 60", "300 678 56 51", "Calle 45 A 63 B 31", UserType.Admin);
             EmployeeEntity employee1 = await CheckEmployeeAsync("1026146086", "Nelson", "Palacios", "nelpaga1126@gmail.com", "230 34 60", "300 678 56 53", "Calle 45 A 63 B 31", UserType.Employee);
-            EmployeeEntity employee2 = await CheckEmployeeAsync("4040", "Juan", "Zuluaga", "nelpaga@hotmail.com", "350 634 2747", "300 678 56 54", "Calle Luna Calle Sol", UserType.Employee);
             await CheckExpenseTypesAsync();
             await CheckTripAsync();
 
@@ -43,10 +42,9 @@ namespace VLegalizer.Web.Data
         {
             if (!_dataContext.ExpenseTypes.Any())
             {
-                //_dataContext.ExpenseTypes.Add(new ExpenseTypeEntity { ExpenseNames = "Alojamiento" });
-               //_dataContext.ExpenseTypes.Add(new ExpenseTypeEntity { ExpenseNames = "Alimentación" });
-               // _dataContext.ExpenseTypes.Add(new ExpenseTypeEntity { ExpenseNames = "Bus" });
-                _dataContext.ExpenseTypes.Add(new ExpenseTypeEntity { ExpenseNames = "Taxi" });
+                _dataContext.ExpenseTypes.Add(new ExpenseTypeEntity { ExpenseNames = "Cena" });
+                _dataContext.ExpenseTypes.Add(new ExpenseTypeEntity { ExpenseNames = "Recarga Celular" });
+                _dataContext.ExpenseTypes.Add(new ExpenseTypeEntity { ExpenseNames = "Domicilio" });
                 await _dataContext.SaveChangesAsync();
             }
         }
@@ -86,7 +84,7 @@ namespace VLegalizer.Web.Data
 
         private async Task CheckTripAsync()
         {
-            EmployeeEntity user = await _userHelper.GetUserByEmailAsync("nelpaga1126@gmail.com");
+            EmployeeEntity employee = await _userHelper.GetUserByEmailAsync("nelpaga1126@gmail.com");
             if (!_dataContext.Trips.Any())
             {
                 _dataContext.Trips.Add(
@@ -96,14 +94,14 @@ namespace VLegalizer.Web.Data
                     StartDate = DateTime.UtcNow,
                     EndDate = DateTime.UtcNow.AddDays(4),
                     City = "Bogotá",
-                    Employee = user,
+                    Employee = employee,
                     TripDetails = new List<TripDetailEntity>
                     {
                         new TripDetailEntity
                         {
                             Date = DateTime.UtcNow,
-                            Description = "Primera noche en Bogotá",
-                            Amount = 1500000,
+                            Description = "Pago hotel primera noche",
+                            Amount = 150000,
                             PicturePath = "",
                             ExpenseType = new ExpenseTypeEntity
                             {
@@ -114,12 +112,63 @@ namespace VLegalizer.Web.Data
                         new TripDetailEntity
                         {
                             Date = DateTime.UtcNow,
-                            Description = "Almuerzo",
-                            Amount = 200000,
+                            Description = "Restaurante XYZ",
+                            Amount = 20000,
                             PicturePath = "",
                             ExpenseType = new ExpenseTypeEntity
                             {
-                                ExpenseNames = "Alimetanción"
+                                ExpenseNames = "Almuerzo"
+                            }
+
+                        },
+                        new TripDetailEntity
+                        {
+                            Date = DateTime.UtcNow,
+                            Description = "Trayecto Casa - Aeropuerto",
+                            Amount = 80000,
+                            PicturePath = "",
+                            ExpenseType = new ExpenseTypeEntity
+                            {
+                                ExpenseNames = "Taxi"
+                            }
+
+                        }
+                    }
+                }
+
+                );
+
+                _dataContext.Trips.Add(
+
+                new TripEntity
+                {
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddDays(4),
+                    City = "Medellin",
+                    Employee = employee,
+                    TripDetails = new List<TripDetailEntity>
+                    {
+                        new TripDetailEntity
+                        {
+                            Date = DateTime.UtcNow,
+                            Description = "Visita cliente minorista",
+                            Amount = 15000,
+                            PicturePath = "",
+                            ExpenseType = new ExpenseTypeEntity
+                            {
+                                ExpenseNames = "Desayuno"
+                            }
+
+                        },
+                        new TripDetailEntity
+                        {
+                            Date = DateTime.UtcNow,
+                            Description = "Visita cliente centro",
+                            Amount = 20000,
+                            PicturePath = "",
+                            ExpenseType = new ExpenseTypeEntity
+                            {
+                                ExpenseNames = "Media-mañana"
                             }
 
                         },
@@ -127,7 +176,7 @@ namespace VLegalizer.Web.Data
                         {
                             Date = DateTime.UtcNow,
                             Description = "Trayectos día",
-                            Amount = 30000,
+                            Amount = 10000,
                             PicturePath = "",
                             ExpenseType = new ExpenseTypeEntity
                             {
@@ -139,8 +188,49 @@ namespace VLegalizer.Web.Data
                 }
                 );
 
+                _dataContext.Trips.Add(
+
+                new TripEntity
+                {
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddDays(4),
+                    City = "Itagüí",
+                    Employee = employee,
+                    TripDetails = new List<TripDetailEntity>
+                    {
+                        new TripDetailEntity
+                        {
+                            Date = DateTime.UtcNow,
+                            Description = "Visita cliente mayorista",
+                            Amount = 15000,
+                            PicturePath = "",
+                            ExpenseType = new ExpenseTypeEntity
+                            {
+                                ExpenseNames = "Algo"
+                            }
+
+                        },
+
+                        new TripDetailEntity
+                        {
+                            Date = DateTime.UtcNow,
+                            Description = "Trayectos día",
+                            Amount = 20000,
+                            PicturePath = "",
+                            ExpenseType = new ExpenseTypeEntity
+                            {
+                                ExpenseNames = "Picap"
+                            }
+
+                        }
+                    }
+                }
+
+                );
+
                 await _dataContext.SaveChangesAsync();
             }
+
         }
 
 

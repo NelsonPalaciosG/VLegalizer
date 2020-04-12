@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VLegalizer.Web.Data;
 using VLegalizer.Web.Data.Entities;
+using VLegalizer.Web.Models;
 
 namespace VLegalizer.Web.Controllers
 {
@@ -22,13 +23,17 @@ namespace VLegalizer.Web.Controllers
         // GET: TripEntities
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Trips.Include(t => t.Employee).Include(t => t.TripDetails).Select(t => new TripEntity()
+            return View(await _context.Trips
+                .Include(t => t.Employee)
+                .Include(t => t.TripDetails)
+                .Select(t => new TripViewModel()
             {
                 Id = t.Id,
                 City = t.City,
                 EndDate = t.EndDate,
                 StartDate = t.StartDate,
-                Employee = t.Employee
+                EmployeeName = t.Employee.FullName,
+                TotalAmount = t.TripDetails.Sum(td => td.Amount)
             }).ToListAsync());
         }
 
@@ -41,8 +46,9 @@ namespace VLegalizer.Web.Controllers
             }
 
             var tripEntity = await _context.Trips
-                .Include(t=> t.TripDetails).ThenInclude(td => td.ExpenseType)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            .Include(t => t.TripDetails)
+            .ThenInclude(td => td.ExpenseType)
+            .FirstOrDefaultAsync(m => m.Id == id);
             if (tripEntity == null)
             {
                 return NotFound();
@@ -139,20 +145,12 @@ namespace VLegalizer.Web.Controllers
                 return NotFound();
             }
 
-            return View(tripEntity);
-        }
-
-        // POST: TripEntities/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var tripEntity = await _context.Trips.FindAsync(id);
             _context.Trips.Remove(tripEntity);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
+        
         private bool TripEntityExists(int id)
         {
             return _context.Trips.Any(e => e.Id == id);

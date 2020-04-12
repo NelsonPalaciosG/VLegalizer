@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Trip DeTails</h4>
+    <h4>Trip Details</h4>
     <hr />
 
     @foreach (var detail in Model.TripDetails)
@@ -32,17 +32,18 @@
         @Html.DisplayFor(modelDetail => detail.Description)
     </dd>
     <dt>
-        @Html.DisplayNameFor(modelDetail => detail.PicturePath)
-    </dt>
-    <dd>
-        <img src=@detail.PicturePath alt="test image"/>
-    </dd>
-    <dt>
         @Html.DisplayNameFor(modelDetail => detail.Amount)
     </dt>
     <dd>
         @Html.DisplayFor(modelDetail => detail.Amount)
     </dd>
+    <dt>
+        @Html.DisplayNameFor(modelDetail => detail.PicturePath)
+    </dt>
+    <dd>
+        <img src=@detail.PicturePath alt="test image" />
+    </dd>
+
 </dl>
     }
 </div>
