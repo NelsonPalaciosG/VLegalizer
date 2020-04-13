@@ -2,7 +2,7 @@
 
 namespace VLegalizer.Web.Migrations
 {
-    public partial class changesinsedderdata : Migration
+    public partial class Changesinsedderdata : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

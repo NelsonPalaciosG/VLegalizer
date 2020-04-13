@@ -10,13 +10,15 @@ namespace VLegalizer.Web.Data.Entities
 
         [DataType(DataType.DateTime)]
         [Display(Name = "Date")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm}", ApplyFormatInEditMode = false)]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}}", ApplyFormatInEditMode = false)]
         public DateTime Date { get; set; }
 
         public DateTime DateLocal => Date.ToLocalTime();
 
         public string Description { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:C0}",
+        ApplyFormatInEditMode = false)]
         public int Amount { get; set; }
 
         [Display(Name = "Picture")]
@@ -24,8 +26,10 @@ namespace VLegalizer.Web.Data.Entities
 
         public TripEntity Trip { get; set; }
 
-        //public virtual ExpenseTypeEntity ExpenseType { get; set; }
-
         public ExpenseTypeEntity ExpenseType { get; set; }
+        //TODO: replace the correct URL for the image
+        public string ImageFullPath => string.IsNullOrEmpty(PicturePath)
+            ? null
+            : $"https://TDB.azurewebsites.net{PicturePath.Substring(1)}";
     }
 }

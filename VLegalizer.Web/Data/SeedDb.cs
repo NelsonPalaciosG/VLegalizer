@@ -24,13 +24,24 @@ namespace VLegalizer.Web.Data
         {
             await _dataContext.Database.EnsureCreatedAsync();
             await CheckRolesAsync();
-            EmployeeEntity admin = await CheckEmployeeAsync("1026146086", "Nelson", "Palacios", "nelsonpalacios98055@correo.itm.edu.co", "230 34 60", "300 678 56 51", "Calle 45 A 63 B 31", UserType.Admin);
-            EmployeeEntity employee1 = await CheckEmployeeAsync("1026146086", "Nelson", "Palacios", "nelpaga1126@gmail.com", "230 34 60", "300 678 56 53", "Calle 45 A 63 B 31", UserType.Employee);
+            await CheckAdminAsync();
+            await CheckEmployeeAsync();
             await CheckExpenseTypesAsync();
             await CheckTripAsync();
 
         }
 
+        private async Task CheckAdminAsync()
+        {
+            await CheckEmployeeAsync("1026146086", "Nelson", "Palacios", "nelsonpalacios98055@correo.itm.edu.co", "230 34 60", "300 678 56 51", "Calle 45 A 63 B 31", UserType.Admin);
+        }
+
+        private async Task CheckEmployeeAsync()
+        {
+            await CheckEmployeeAsync("1026146086", "Nelson", "Palacios", "nelpaga1126@gmail.com", "230 34 60", "300 678 56 53", "Calle 45 A 63 B 31", UserType.Employee);
+            await CheckEmployeeAsync("1026146081", "Alejandro", "Galeano", "nelpaga@hotmail.com", "230 34 65", "300 878 56 53", "Calle 45 A 63 A 50", UserType.Employee);
+
+        }
 
         private async Task CheckRolesAsync()
         {
@@ -85,6 +96,7 @@ namespace VLegalizer.Web.Data
         private async Task CheckTripAsync()
         {
             EmployeeEntity employee = await _userHelper.GetUserByEmailAsync("nelpaga1126@gmail.com");
+            EmployeeEntity employeebk = await _userHelper.GetUserByEmailAsync("nelpaga@hotmail.com");
             if (!_dataContext.Trips.Any())
             {
                 _dataContext.Trips.Add(
@@ -145,7 +157,7 @@ namespace VLegalizer.Web.Data
                     StartDate = DateTime.UtcNow,
                     EndDate = DateTime.UtcNow.AddDays(4),
                     City = "Medellin",
-                    Employee = employee,
+                    Employee = employeebk,
                     TripDetails = new List<TripDetailEntity>
                     {
                         new TripDetailEntity

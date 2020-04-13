@@ -54,7 +54,7 @@ namespace VLegalizer.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                expenseTypeEntity.ExpenseNames = expenseTypeEntity.ExpenseNames.ToUpper();
+                expenseTypeEntity.ExpenseNames = expenseTypeEntity.ExpenseNames;
                 _context.Add(expenseTypeEntity);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -93,7 +93,7 @@ namespace VLegalizer.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                expenseTypeEntity.ExpenseNames = expenseTypeEntity.ExpenseNames.ToUpper();
+                expenseTypeEntity.ExpenseNames = expenseTypeEntity.ExpenseNames;
                 _context.Update(expenseTypeEntity);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

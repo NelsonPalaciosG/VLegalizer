@@ -11,7 +11,7 @@ namespace VLegalizer.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
     [Migration("20200412181011_changes in sedder data")]
-    partial class changesinsedderdata
+    partial class Changesinsedderdata
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
