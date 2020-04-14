@@ -41,6 +41,6 @@ namespace VLegalizer.Web.Data.Entities
 
         public ICollection<TripEntity> Trips { get; set; }
 
-        public UserType UserType { get; internal set; }
+        public UserType UserType { get; set; }
     }
 }

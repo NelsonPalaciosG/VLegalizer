@@ -1,31 +1,77 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
+using VLegalizer.Common.Models;
 using VLegalizer.Web.Data;
 using VLegalizer.Web.Data.Entities;
+using VLegalizer.Web.Helper;
 
 namespace VLegalizer.Web.Controllers.API
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class TripsController : ControllerBase
     {
         private readonly DataContext _context;
+        private readonly IConverterHelper _converterHelper;
 
-        public TripsController(DataContext context)
+        public TripsController(DataContext context,
+               IConverterHelper converterHelper)
         {
             _context = context;
+            _converterHelper = converterHelper;
+
         }
 
-        // GET: api/Trips
-        [HttpGet]
-        public IEnumerable<TripEntity> GetTrips()
+        [HttpPost]
+        [Route("GetTripByEmail")]
+        public async Task<IActionResult> GetTrip([FromBody]EmailRequest emailRequest)
         {
-            return _context.Trips;
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest();
+                }
+                TripEntity tripEntity = await _context.Trips
+                    .Include(t => t.Employee)
+                    .Include(t => t.TripDetails)
+                    .ThenInclude(e => e.ExpenseType)
+                    .FirstOrDefaultAsync(t => t.Employee.Email.ToLower() == emailRequest.Email.ToLower());
+                TripResponse response = new TripResponse
+                {
+                    Employee = new EmployeeResponse
+                    {
+                        Id = tripEntity.Employee.Id,
+                        Document = tripEntity.Employee.Document,
+                        FirstName = tripEntity.Employee.FirstName,
+                        LastName = tripEntity.Employee.LastName,
+                        FixedPhone = tripEntity.Employee.FixedPhone,
+                        CellPhone = tripEntity.Employee.CellPhone,
+                        Address = tripEntity.Employee.Address,
+                        UserType = tripEntity.Employee.UserType,
+                    },
+                    Id = tripEntity.Id,
+                    City = tripEntity.City,
+                    StartDate = tripEntity.StartDate,
+                    EndDate = tripEntity.EndDate,
+                    TripDetails = tripEntity.TripDetails.Select(td => new TripDetailResponse
+                    {
+                        Id = td.Id,
+                        Date = td.Date,
+                        Description = td.Description,
+                        Amount = td.Amount,
+                        PicturePath = td.ImageFullPath,
+                        ExpenseType = td.ExpenseType.ExpenseNames
+                    }).ToList()
+
+                };
+
+                return Ok(response);
+            }
         }
 
         // GET: api/Trips/5
@@ -37,7 +83,7 @@ namespace VLegalizer.Web.Controllers.API
                 return BadRequest(ModelState);
             }
 
-            var tripEntity = await _context.Trips.FindAsync(id);
+            TripEntity tripEntity = await _context.Trips.FindAsync(id);
 
             if (tripEntity == null)
             {
@@ -106,7 +152,7 @@ namespace VLegalizer.Web.Controllers.API
                 return BadRequest(ModelState);
             }
 
-            var tripEntity = await _context.Trips.FindAsync(id);
+            TripEntity tripEntity = await _context.Trips.FindAsync(id);
             if (tripEntity == null)
             {
                 return NotFound();

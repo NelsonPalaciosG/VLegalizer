@@ -1,53 +1,90 @@
 ﻿@model VLegalizer.Web.Data.Entities.TripEntity
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Trip Details";
 }
 
-<h2>Details</h2>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+<br />
 
-<div>
-    <h4>Trip Details</h4>
-    <hr />
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Trip Details</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-hover table-responsive table-striped" id="MyTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                <p>ExpenseNames</p>
 
-    @foreach (var detail in Model.TripDetails)
-    {
-<dl class="dl-horizontal">
-    <dt>
-        @Html.DisplayNameFor(modelDetail => detail.ExpenseType.ExpenseNames)
-    </dt>
-    <dd>
-        @Html.DisplayFor(modelDetail => detail.ExpenseType.ExpenseNames)
-    </dd>
-    <dt>
-        @Html.DisplayNameFor(modelDetail => detail.DateLocal)
-    </dt>
-    <dd>
-        @Html.DisplayFor(modelDetail => detail.DateLocal)
-    </dd>
-    <dt>
-        @Html.DisplayNameFor(modelDetail => detail.Description)
-    </dt>
-    <dd>
-        @Html.DisplayFor(modelDetail => detail.Description)
-    </dd>
-    <dt>
-        @Html.DisplayNameFor(modelDetail => detail.Amount)
-    </dt>
-    <dd>
-        @Html.DisplayFor(modelDetail => detail.Amount)
-    </dd>
-    <dt>
-        @Html.DisplayNameFor(modelDetail => detail.PicturePath)
-    </dt>
-    <dd>
-        <img src=@detail.PicturePath alt="test image" />
-    </dd>
+                            </th>
+                            <th>
+                                <p>DateLocal</p>
+                            </th>
+                            <th>
+                                <p>Description</p>
+                            </th>
+                            <th>
+                                <p> Amount</p>
+                            </th>
+                            <th>
+                                <p>PicturePath</p>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var detail in Model.TripDetails)
+                        {
+                            <tr>
+                                <td>
 
-</dl>
-    }
+                                    @Html.DisplayFor(modelDetail => detail.ExpenseType.ExpenseNames)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelDetail => detail.DateLocal)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelDetail => detail.Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelDetail => detail.Amount)
+                                </td>
+                                <td>
+                                    <img src=@detail.PicturePath alt="test image" />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <a asp-action="Index" class="btn btn-success">Back to List</a>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a> |
-    <a asp-action="Index" class="btn btn-success">Back to List</a>
-</div>
+
+<partial name="_DeleteDialog" />
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#MyTable').DataTable();
+
+            // Delete item
+            var item_to_delete;
+
+            $('.deleteItem').click((e) => {
+                item_to_delete = e.currentTarget.dataset.id;
+            });
+
+            $("#btnYesDelete").click(function () {
+                window.location.href = '/TripEntities/Delete/' + item_to_delete;
+            });
+        });
+    </script>
+}

@@ -1,34 +1,29 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 
-namespace VLegalizer.Web.Data.Entities
+namespace VLegalizer.Common.Models
 {
-    public class TripDetailEntity
+    public class TripDetailResponse
     {
         public int Id { get; set; }
 
-        [DataType(DataType.DateTime)]
-        [Display(Name = "Date")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}}", ApplyFormatInEditMode = false)]
         public DateTime Date { get; set; }
 
         public DateTime DateLocal => Date.ToLocalTime();
 
         public string Description { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:C0}",
-        ApplyFormatInEditMode = false)]
         public int Amount { get; set; }
 
-        [Display(Name = "Picture")]
         public string PicturePath { get; set; }
 
-        public TripEntity Trip { get; set; }
+        public string ExpenseType { get; set; }
 
-        public ExpenseTypeEntity ExpenseType { get; set; }
         //TODO: replace the correct URL for the image
         public string ImageFullPath => string.IsNullOrEmpty(PicturePath)
             ? null
             : $"https://TDB.azurewebsites.net{PicturePath.Substring(1)}";
+
+        public TripResponse Trip { get; set; }
+
     }
 }

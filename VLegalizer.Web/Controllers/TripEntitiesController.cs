@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using VLegalizer.Web.Data;
 using VLegalizer.Web.Data.Entities;
 using VLegalizer.Web.Models;
@@ -27,14 +24,14 @@ namespace VLegalizer.Web.Controllers
                 .Include(t => t.Employee)
                 .Include(t => t.TripDetails)
                 .Select(t => new TripViewModel()
-            {
-                Id = t.Id,
-                City = t.City,
-                EndDate = t.EndDate,
-                StartDate = t.StartDate,
-                EmployeeName = t.Employee.FullName,
-                TotalAmount = t.TripDetails.Sum(td => td.Amount)
-            }).ToListAsync());
+                {
+                    Id = t.Id,
+                    City = t.City,
+                    EndDate = t.EndDate,
+                    StartDate = t.StartDate,
+                    EmployeeName = t.Employee.FullName,
+                    TotalAmount = t.TripDetails.Sum(td => td.Amount)
+                }).ToListAsync());
         }
 
         // GET: TripEntities/Details/5
@@ -45,7 +42,7 @@ namespace VLegalizer.Web.Controllers
                 return NotFound();
             }
 
-            var tripEntity = await _context.Trips
+            TripEntity tripEntity = await _context.Trips
             .Include(t => t.TripDetails)
             .ThenInclude(td => td.ExpenseType)
             .FirstOrDefaultAsync(m => m.Id == id);
@@ -87,7 +84,7 @@ namespace VLegalizer.Web.Controllers
                 return NotFound();
             }
 
-            var tripEntity = await _context.Trips.FindAsync(id);
+            TripEntity tripEntity = await _context.Trips.FindAsync(id);
             if (tripEntity == null)
             {
                 return NotFound();
@@ -138,7 +135,7 @@ namespace VLegalizer.Web.Controllers
                 return NotFound();
             }
 
-            var tripEntity = await _context.Trips
+            TripEntity tripEntity = await _context.Trips
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (tripEntity == null)
             {
@@ -150,7 +147,7 @@ namespace VLegalizer.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        
+
         private bool TripEntityExists(int id)
         {
             return _context.Trips.Any(e => e.Id == id);

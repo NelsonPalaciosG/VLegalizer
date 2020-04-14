@@ -1,7 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using VLegalizer.Web.Data.Entities;
 using VLegalizer.Web.Models;
@@ -74,5 +71,14 @@ namespace VLegalizer.Web.Helper
         {
             await _signInManager.SignOutAsync();
         }
+
+        public async Task<SignInResult> ValidatePasswordAsync(EmployeeEntity user, string password)
+        {
+            return await _signInManager.CheckPasswordSignInAsync(
+                user,
+                password,
+                false);
+        }
+
     }
 }

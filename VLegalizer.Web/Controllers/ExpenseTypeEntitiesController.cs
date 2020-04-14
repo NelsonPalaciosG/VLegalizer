@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 using VLegalizer.Web.Data;
 using VLegalizer.Web.Data.Entities;
 
@@ -33,7 +29,7 @@ namespace VLegalizer.Web.Controllers
                 return NotFound();
             }
 
-            var expenseTypeEntity = await _context.ExpenseTypes.FindAsync(id);
+            ExpenseTypeEntity expenseTypeEntity = await _context.ExpenseTypes.FindAsync(id);
             if (expenseTypeEntity == null)
             {
                 return NotFound();
@@ -71,7 +67,7 @@ namespace VLegalizer.Web.Controllers
                 return NotFound();
             }
 
-            var expenseTypeEntity = await _context.ExpenseTypes.FindAsync(id);
+            ExpenseTypeEntity expenseTypeEntity = await _context.ExpenseTypes.FindAsync(id);
             if (expenseTypeEntity == null)
             {
                 return NotFound();
@@ -109,7 +105,7 @@ namespace VLegalizer.Web.Controllers
                 return NotFound();
             }
 
-            var expenseTypeEntity = await _context.ExpenseTypes
+            ExpenseTypeEntity expenseTypeEntity = await _context.ExpenseTypes
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (expenseTypeEntity == null)
             {

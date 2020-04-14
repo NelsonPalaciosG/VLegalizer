@@ -1,7 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using VLegalizer.Web.Data.Entities;
 using VLegalizer.Web.Models;
@@ -23,6 +20,10 @@ namespace VLegalizer.Web.Helper
         Task<SignInResult> LoginAsync(LoginViewModel model);
 
         Task LogoutAsync();
+
+        Task<SignInResult> ValidatePasswordAsync(EmployeeEntity user, string password);
+
+
 
     }
 }

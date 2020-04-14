@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using VLegalizer.Web.Data;
 using VLegalizer.Web.Data.Entities;
 using VLegalizer.Web.Helper;
@@ -41,13 +43,27 @@ namespace VLegalizer.Web
             }).AddEntityFrameworkStores<DataContext>();
 
 
+
             services.AddDbContext<DataContext>(cfg =>
             {
                 cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            services.AddAuthentication()
+                .AddCookie()
+                .AddJwtBearer(cfg =>
+                {
+                    cfg.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidIssuer = Configuration["Tokens:Issuer"],
+                        ValidAudience = Configuration["Tokens:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"]))
+                    };
+                });
+
             services.AddTransient<SeedDb>();
             services.AddScoped<IUserHelper, UserHelper>();
+            services.AddScoped<IConverterHelper, ConverterHelper>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

@@ -9,17 +9,17 @@ namespace VLegalizer.Web
     {
         public static void Main(string[] args)
         {
-            var host = CreateWebHostBuilder(args).Build();
+            IWebHost host = CreateWebHostBuilder(args).Build();
             RunSeeding(host);
             host.Run();
         }
 
         private static void RunSeeding(IWebHost host)
         {
-            var scopeFactory = host.Services.GetService<IServiceScopeFactory>();
-            using (var scope = scopeFactory.CreateScope())
+            IServiceScopeFactory scopeFactory = host.Services.GetService<IServiceScopeFactory>();
+            using (IServiceScope scope = scopeFactory.CreateScope())
             {
-                var seeder = scope.ServiceProvider.GetService<SeedDb>();
+                SeedDb seeder = scope.ServiceProvider.GetService<SeedDb>();
                 seeder.SeedAsync().Wait();
             }
         }
