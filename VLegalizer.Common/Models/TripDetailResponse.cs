@@ -23,7 +23,5 @@ namespace VLegalizer.Common.Models
             ? null
             : $"https://TDB.azurewebsites.net{PicturePath.Substring(1)}";
 
-        public TripResponse Trip { get; set; }
-
     }
 }

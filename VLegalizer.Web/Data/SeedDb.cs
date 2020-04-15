@@ -38,8 +38,8 @@ namespace VLegalizer.Web.Data
 
         private async Task CheckEmployeeAsync()
         {
-            await CheckEmployeeAsync("1026146086", "Nelson", "Palacios", "nelpaga1126@gmail.com", "230 34 60", "300 678 56 53", "Calle 45 A 63 B 31", UserType.Employee);
-            await CheckEmployeeAsync("1026146081", "Alejandro", "Galeano", "nelpaga@hotmail.com", "230 34 65", "300 878 56 53", "Calle 45 A 63 A 50", UserType.Employee);
+            await CheckEmployeeAsync("1026146086", "Nelson", "Palacios", "nelpaga1126@gmail.com", "300 678 56 53", "230 34 60", "Calle 45 A 63 B 31", UserType.Employee);
+            await CheckEmployeeAsync("1026146081", "Alejandro", "Galeano", "nelpaga@hotmail.com", "300 878 56 53", "230 34 65", "Calle 45 A 63 A 50", UserType.Employee);
 
         }
 
@@ -65,7 +65,7 @@ namespace VLegalizer.Web.Data
             string firstName,
             string lastName,
             string email,
-            string phone,
+            string cellphone,
             string fixedphone,
             string address,
             UserType userType)
@@ -79,7 +79,7 @@ namespace VLegalizer.Web.Data
                     LastName = lastName,
                     Email = email,
                     UserName = email,
-                    PhoneNumber = phone,
+                    CellPhone = cellphone,
                     FixedPhone = fixedphone,
                     Address = address,
                     Document = document,

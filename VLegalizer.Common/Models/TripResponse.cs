@@ -20,7 +20,7 @@ namespace VLegalizer.Common.Models
 
         public EmployeeResponse Employee { get; set; }
 
-        public List<TripDetailResponse> TripDetails { get; set; }
+        public ICollection<TripDetailResponse> TripDetails { get; set; }
 
     }
 }

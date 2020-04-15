@@ -1,5 +1,6 @@
 ﻿using Prism;
 using Prism.Ioc;
+using VLegalizer.Common.Models.Services;
 using VLegalizer.Prism.ViewModels;
 using VLegalizer.Prism.Views;
 using Xamarin.Forms;
@@ -10,11 +11,7 @@ namespace VLegalizer.Prism
 {
     public partial class App
     {
-        /* 
-         * The Xamarin Forms XAML Previewer in Visual Studio uses System.Activator.CreateInstance.
-         * This imposes a limitation in which the App class must have a default constructor. 
-         * App(IPlatformInitializer initializer = null) cannot be handled by the Activator.
-         */
+
         public App() : this(null) { }
 
         public App(IPlatformInitializer initializer) : base(initializer) { }
@@ -23,13 +20,15 @@ namespace VLegalizer.Prism
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            await NavigationService.NavigateAsync("NavigationPage/LoginPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.Register<IApiService, ApiService>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
+            containerRegistry.RegisterForNavigation<TripsPage, TripsPageViewModel>();
         }
     }
 }

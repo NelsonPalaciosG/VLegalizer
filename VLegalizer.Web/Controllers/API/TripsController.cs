@@ -41,7 +41,7 @@ namespace VLegalizer.Web.Controllers.API
                     .Include(t => t.TripDetails)
                     .ThenInclude(e => e.ExpenseType)
                     .FirstOrDefaultAsync(t => t.Employee.Email.ToLower() == emailRequest.Email.ToLower());
-                TripResponse response = new TripResponse
+                var response = new TripResponse
                 {
                     Employee = new EmployeeResponse
                     {

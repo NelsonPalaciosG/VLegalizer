@@ -21,12 +21,7 @@ namespace VLegalizer.Web.Helper
                     Description = td.Description,
                     Amount = td.Amount,
                     PicturePath = td.PicturePath,
-                    /*                   ExpenseType = td.ExpenseType?.(e => new ExpenseTypeResponse
-                                       {
-                                           Id = e.Id,
-                                           ExpenseNames = e.ExpenseNames
-                                       }
-                    */
+                    ExpenseType = td.ExpenseType.ExpenseNames
                 }).ToList(),
                 Employee = ToEmployeeResponse(tripEntity.Employee)
             };
