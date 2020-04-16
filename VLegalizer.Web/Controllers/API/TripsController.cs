@@ -37,36 +37,37 @@ namespace VLegalizer.Web.Controllers.API
                     return BadRequest();
                 }
 
-                var employeeEntity = await _context.Employees
-                    .Include(e => e.Trips)
-                    .ThenInclude(t => t.TripDetails)
-                    .ThenInclude(et => et.ExpenseType)
-                    .FirstOrDefaultAsync(e => e.Email.ToLower() == emailRequest.Email.ToLower());
-                var response = new EmployeeResponse
-                {   
-                        Document = employeeEntity.Document,
-                        FirstName = employeeEntity.FirstName,
-                        LastName = employeeEntity.LastName,
-                        FixedPhone = employeeEntity.FixedPhone,
-                        CellPhone = employeeEntity.CellPhone,
-                        Address = employeeEntity.Address,
-                        UserType = employeeEntity.UserType,
-                    
-                    Trips = employeeEntity.Trips.Select(t => new TripResponse
+                var tripEntity = await _context.Trips
+                    .Include(t => t.Employee)
+                    .Include(t => t.TripDetails)
+                    .ThenInclude(e => e.ExpenseType)
+                    .FirstOrDefaultAsync(t => t.Employee.Email.ToLower() == emailRequest.Email.ToLower());
+                var response = new TripResponse
+                {
+                    Employee = new EmployeeResponse
                     {
-                        Id = t.Id,
-                        StartDate = t.StartDate,
-                        EndDate = t.EndDate,
-                        City = t.City,
-                        TripDetails = t.TripDetails.Select(td => new TripDetailResponse
-                        {
-                            Id = td.Id,
-                            Date = td.Date,
-                            Amount = td.Amount,
-                            PicturePath = td.ImageFullPath,
-                            ExpenseType = td.ExpenseType.ExpenseNames
-                        }).ToList(),
+                        Document = tripEntity.Employee.Document,
+                        FirstName = tripEntity.Employee.FirstName,
+                        LastName = tripEntity.Employee.LastName,
+                        FixedPhone = tripEntity.Employee.FixedPhone,
+                        CellPhone = tripEntity.Employee.CellPhone,
+                        Address = tripEntity.Employee.Address,
+                        UserType = tripEntity.Employee.UserType,
+                    },
+
+                    Id = tripEntity.Id,
+                    StartDate = tripEntity.StartDate,
+                    EndDate = tripEntity.EndDate,
+                    City = tripEntity.City,
+                    TripDetails = tripEntity.TripDetails.Select(td => new TripDetailResponse
+                    {
+                        Id = td.Id,
+                        Date = td.Date,
+                        Amount = td.Amount,
+                        PicturePath = td.ImageFullPath,
+                        ExpenseType = td.ExpenseType.ExpenseNames
                     }).ToList()
+
                 };
 
                 return Ok(response);
