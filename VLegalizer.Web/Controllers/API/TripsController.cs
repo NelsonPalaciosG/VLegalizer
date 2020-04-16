@@ -38,11 +38,22 @@ namespace VLegalizer.Web.Controllers.API
                 }
 
                 var tripEntity = await _context.Trips
+                    .Include(t => t.Employee)
                     .Include(t => t.TripDetails)
                     .ThenInclude(e => e.ExpenseType)
                     .FirstOrDefaultAsync(t => t.Employee.Email.ToLower() == emailRequest.Email.ToLower());
                 var response = new TripResponse
                 {
+                    Employee = new EmployeeResponse
+                    {
+                        Document = tripEntity.Employee.Document,
+                        FirstName = tripEntity.Employee.FirstName,
+                        LastName = tripEntity.Employee.LastName,
+                        FixedPhone = tripEntity.Employee.FixedPhone,
+                        CellPhone = tripEntity.Employee.CellPhone,
+                        Address = tripEntity.Employee.Address,
+                        UserType = tripEntity.Employee.UserType,
+                    },
 
                     Id = tripEntity.Id,
                     StartDate = tripEntity.StartDate,
