@@ -36,33 +36,22 @@ namespace VLegalizer.Web.Controllers.API
                 {
                     return BadRequest();
                 }
-                TripEntity tripEntity = await _context.Trips
-                    .Include(t => t.Employee)
+
+                var tripEntity = await _context.Trips
                     .Include(t => t.TripDetails)
                     .ThenInclude(e => e.ExpenseType)
                     .FirstOrDefaultAsync(t => t.Employee.Email.ToLower() == emailRequest.Email.ToLower());
                 var response = new TripResponse
                 {
-                    Employee = new EmployeeResponse
-                    {
-                        Id = tripEntity.Employee.Id,
-                        Document = tripEntity.Employee.Document,
-                        FirstName = tripEntity.Employee.FirstName,
-                        LastName = tripEntity.Employee.LastName,
-                        FixedPhone = tripEntity.Employee.FixedPhone,
-                        CellPhone = tripEntity.Employee.CellPhone,
-                        Address = tripEntity.Employee.Address,
-                        UserType = tripEntity.Employee.UserType,
-                    },
+
                     Id = tripEntity.Id,
-                    City = tripEntity.City,
                     StartDate = tripEntity.StartDate,
                     EndDate = tripEntity.EndDate,
+                    City = tripEntity.City,
                     TripDetails = tripEntity.TripDetails.Select(td => new TripDetailResponse
                     {
                         Id = td.Id,
                         Date = td.Date,
-                        Description = td.Description,
                         Amount = td.Amount,
                         PicturePath = td.ImageFullPath,
                         ExpenseType = td.ExpenseType.ExpenseNames

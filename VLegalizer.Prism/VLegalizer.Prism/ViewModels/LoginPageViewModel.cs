@@ -11,15 +11,21 @@ namespace VLegalizer.Prism.ViewModels
 {
     public class LoginPageViewModel : ViewModelBase
     {
+        private readonly INavigationService _navigationService;
+        private readonly IApiService _apiService;
         private bool _isRunning;
         private bool _isEnabled;
         private string _password;
         private DelegateCommand _loginCommand;
         private DelegateCommand _registerCommand;
 
-        public LoginPageViewModel(INavigationService navigationService) : base(navigationService)
+        public LoginPageViewModel(
+            INavigationService navigationService,
+            IApiService apiService) : base(navigationService)
         {
-            //Title = Login;
+            _navigationService = navigationService;
+            _apiService = apiService;
+            Title = "Login";
             IsEnabled = true;
         }
 
@@ -61,16 +67,55 @@ namespace VLegalizer.Prism.ViewModels
                 return;
             }
 
-            await App.Current.MainPage.DisplayAlert("Ok", "We are making progress!", "Accept");
+            IsRunning = true;
+            IsEnabled = false;
+
+            var request = new TokenRequest
+            {
+                Password = Password,
+                Username = Email
+            };
+
+            var url = App.Current.Resources["UrlAPI"].ToString();
+            var response = await _apiService.GetTokenAsync(url, "Account", "/CreateToken", request);
+
+            IsRunning = false;
+            IsEnabled = true;
+
+            if (!response.IsSuccess)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "User or password are incorrect.", "Accept");
+                Password = string.Empty;
+                return;
+
+            }
+
+            var token = (TokenResponse)response.Result;
+            var response2 = await _apiService.GetTripByEmailAsync(url, "api", "/Trips/GetTripByEmail", "bearer", token.Token, Email);
+
+            if (!response2.IsSuccess)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "This user have a big problem, call support.", "Accept");
+                Password = string.Empty;
+                return;
+            }
+
+            var trip = (TripResponse)response2.Result;
+            var parameters = new NavigationParameters
+            {
+                { "trip",trip }
+            };
+
+            IsRunning = false;
+            IsEnabled = true;
+
+            await _navigationService.NavigateAsync("TripsPage", parameters);
+            Password = string.Empty;
+
         }
-  
 
-
-         private void RegisterAsync()
-         {
-         }
+        private void RegisterAsync()
+        {
+        }
     }
-
-
 }
-

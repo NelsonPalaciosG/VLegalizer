@@ -5,5 +5,18 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="VLegalizer.Prism.Views.TripsPage"
              Title="{Binding Title}">
+    
+    <AbsoluteLayout>
+        <StackLayout
+            Padding="10">
+            <Label
+        	    Text="City"/>
+            <Entry
+        	    Text="{Binding }"/>
+            <Label></Label>
+
+ 
+        </StackLayout>
+    </AbsoluteLayout>
   
 </ContentPage>

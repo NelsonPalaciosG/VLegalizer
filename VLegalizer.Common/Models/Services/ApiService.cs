@@ -74,7 +74,7 @@ namespace VLegalizer.Common.Models.Services
                 };
 
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenType, accessToken);
-                var url = $"{servicePrefix}{controller}";
+                var url = $"{urlBase}{servicePrefix}{controller}";
                 var response = await client.PostAsync(url, content);
                 var result = await response.Content.ReadAsStringAsync();
 
@@ -87,11 +87,11 @@ namespace VLegalizer.Common.Models.Services
                     };
                 }
 
-                var employee = JsonConvert.DeserializeObject<EmployeeResponse>(result);
+                var trip = JsonConvert.DeserializeObject<TripResponse>(result);
                 return new Response
                 {
                     IsSuccess = true,
-                    Result = employee
+                    Result = trip
                 };
             }
             catch (Exception ex)
