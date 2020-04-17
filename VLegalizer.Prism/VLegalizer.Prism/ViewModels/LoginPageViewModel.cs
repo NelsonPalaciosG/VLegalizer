@@ -103,13 +103,13 @@ namespace VLegalizer.Prism.ViewModels
             var trip = (TripResponse)response2.Result;
             var parameters = new NavigationParameters
             {
-                { "trip",trip }
+                { "trips",trip }
             };
 
             IsRunning = false;
             IsEnabled = true;
 
-            await _navigationService.NavigateAsync("TripsPage", parameters);
+            await _navigationService.NavigateAsync("/VLegalizerMasterDetailPage/NavigationPage/TripsPage", parameters);
             Password = string.Empty;
 
         }

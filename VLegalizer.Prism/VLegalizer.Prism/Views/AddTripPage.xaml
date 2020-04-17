@@ -3,20 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="VLegalizer.Prism.Views.TripsPage"
+             x:Class="VLegalizer.Prism.Views.AddTripPage"
              Title="{Binding Title}">
-    
-    <AbsoluteLayout>
-        <StackLayout
-            Padding="10">
-            <Label
-        	    Text="City"/>
-            <Entry
-        	    Text="{Binding Trip.City}"/>
-            <Label></Label>
-
- 
-        </StackLayout>
-    </AbsoluteLayout>
   
 </ContentPage>

@@ -27,7 +27,7 @@ namespace VLegalizer.Prism.ViewModels
                 return;
             }
 
-            await _navigationService.NavigateAsync($"/VLegalizerMasterDetail/NavigationPage/{PageName}");
+            await _navigationService.NavigateAsync($"/VLegalizerMasterDetailPage/NavigationPage/{PageName}");
 
         }
     }
