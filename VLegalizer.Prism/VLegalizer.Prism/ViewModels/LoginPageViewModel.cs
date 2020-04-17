@@ -103,7 +103,7 @@ namespace VLegalizer.Prism.ViewModels
             var trip = (TripResponse)response2.Result;
             var parameters = new NavigationParameters
             {
-                { "trips",trip }
+                { "trip",trip }
             };
 
             IsRunning = false;

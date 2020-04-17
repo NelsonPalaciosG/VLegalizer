@@ -9,11 +9,11 @@
     <AbsoluteLayout>
         <StackLayout
             Padding="10">
-    
-            <StackLayout>
-                <Label Text=" City"/>
-                <Label Text="{Binding Trips.City}"/>
-            </StackLayout>
+            <Label
+        	    Text="City"/>
+            <Entry
+        	    Text="{Binding }"/>
+            <Label></Label>
 
  
         </StackLayout>
