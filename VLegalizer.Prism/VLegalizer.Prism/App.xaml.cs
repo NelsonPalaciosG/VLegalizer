@@ -1,5 +1,6 @@
 ﻿using Prism;
 using Prism.Ioc;
+using Syncfusion.Licensing;
 using VLegalizer.Common.Models.Services;
 using VLegalizer.Prism.ViewModels;
 using VLegalizer.Prism.Views;
@@ -18,6 +19,7 @@ namespace VLegalizer.Prism
 
         protected override async void OnInitialized()
         {
+            SyncfusionLicenseProvider.RegisterLicense("MjQyMDQ2QDMxMzgyZTMxMmUzMEVPTThyc0NLc1grWEFTdXY4VjVsakJjelF4bHNKK3VIYlZaY0c1di9IMXM9");
             InitializeComponent();
 
             await NavigationService.NavigateAsync("NavigationPage/LoginPage");
