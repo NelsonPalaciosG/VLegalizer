@@ -4,57 +4,69 @@
              xmlns:prism="http://prismlibrary.com"
              xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              prism:ViewModelLocator.AutowireViewModel="True"
+             
              x:Class="VLegalizer.Prism.Views.LoginPage"
              Title="{Binding Title}">
-    
-    <ScrollView>
-        <AbsoluteLayout>
-                <StackLayout
-                AbsoluteLayout.LayoutBounds="0,0,1,1"
-                AbsoluteLayout.LayoutFlags="All"
-                Padding="10">
 
-                    <Image
-                    HeightRequest="180"
-                    Source="VLegalizer_logo"/>
-                    <Label
-                    Text="Email"/>
-                    <Entry
-                    Keyboard="Email"
-                    Placeholder="EmailPlaceHolder"
-                    Text="{Binding Email}"/>
-                    <Label
-                    Text="Password"/>
-                <Entry
-                    IsPassword="True"
-                    Placeholder="PasswordPlaceHolder"
-                    Text="{Binding Password}"/>
-                <StackLayout
-                    Orientation="Horizontal"
-                    VerticalOptions="EndAndExpand">
-                        <Button
+
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     AbsoluteLayout.LayoutFlags="All" 
+                     Padding="10">
+            <Image HeightRequest="325"
+                   Margin="0,20,0,5"
+                   Source="VLegalizer_logo"/>
+            <StackLayout  VerticalOptions="CenterAndExpand">
+                <Grid Margin="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" 
+                           Grid.Row="0"
+                           HorizontalTextAlignment="End"
+                           Text="Email"
+                           VerticalOptions="Center"/>
+                    <Entry Grid.Column="1"
+                           Grid.Row="0"
+                           Keyboard="Email"
+                           Placeholder="EmailPlaceHolder"
+                           Text="{Binding Email}"/>
+                    <Label Grid.Column="0" 
+                           Grid.Row="1"
+                           HorizontalTextAlignment="End"
+                           Text="Password"
+                           VerticalOptions="Center"/>
+                    <Entry Grid.Column="1"
+                           Grid.Row="1"
+                           IsPassword="True"
+                           Placeholder="PasswordPlaceHolder"
+                           Text="{Binding Password}"/>
+                </Grid>
+                <Label FontAttributes="Bold"
+                       HorizontalOptions="Center" 
+                       Text="ForgotPassword">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+            <StackLayout>
+                <Button Command="{Binding LoginCommand}" 
                         IsEnabled="{Binding IsEnabled}"
-                        Command="{Binding LoginCommand}"
                         Text="Login"/>
-                        <Button
+                <Button Command="{Binding RegisterCommand}" 
                         IsEnabled="{Binding IsEnabled}"
-                        Command="{Binding RegisterCommand}"
-                        
                         Text="Register"/>
-                    </StackLayout>
-                </StackLayout>
-                <busyindicator:SfBusyIndicator  
-                AnimationType="Gear"
-                AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
-                AbsoluteLayout.LayoutFlags="All"
-               
-                HorizontalOptions="Center"
-               
-                IsVisible="{Binding IsRunning}"
-                Title="Loading..."
-                VerticalOptions="Center"
-                ViewBoxWidth="80"
-                ViewBoxHeight="80" />
-            </AbsoluteLayout>
-        </ScrollView>
+            </StackLayout>
+        </StackLayout>
+        <busyindicator:SfBusyIndicator AnimationType="HorizontalPulsingBox" 
+                                       AbsoluteLayout.LayoutBounds=".5,.58,.5,.42"
+                	                   AbsoluteLayout.LayoutFlags="All"
+                	                   HorizontalOptions="Center"
+                	                   IsVisible="{Binding IsRunning}"
+                	                   VerticalOptions="Center"
+                	                   ViewBoxWidth="80"
+                	                   ViewBoxHeight="80" />
+    </AbsoluteLayout>
 </ContentPage>
