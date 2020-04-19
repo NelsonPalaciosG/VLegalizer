@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using VLegalizer.Common.Models;
 using VLegalizer.Web.Data.Entities;
 
@@ -6,7 +7,7 @@ namespace VLegalizer.Web.Helper
 {
     public class ConverterHelper : IConverterHelper
     {
-        public TripResponse ToTripResponse(TripEntity tripEntity)
+       /* public TripResponse ToTripResponse(TripEntity tripEntity)
         {
             return new TripResponse
             {
@@ -26,9 +27,21 @@ namespace VLegalizer.Web.Helper
                 Employee = ToEmployeeResponse(tripEntity.Employee)
             };
 
+        }*/
+        public List<TripResponse> ToTripResponse(List<TripEntity> tripEntity)
+        {
+            return tripEntity.Select(t => new TripResponse
+            {
+                Id = t.Id,
+                StartDate = t.StartDate,
+                EndDate = t.EndDate,
+                City = t.City,
+
+                Employee = ToEmployeeResponse(t.Employee)
+            }).ToList();
         }
 
-        private EmployeeResponse ToEmployeeResponse(EmployeeEntity employee)
+        public EmployeeResponse ToEmployeeResponse(EmployeeEntity employee)
         {
             if (employee == null)
             {

@@ -91,7 +91,7 @@ namespace VLegalizer.Prism.ViewModels
             }
 
             var token = (TokenResponse)response.Result;
-            var response2 = await _apiService.GetTripByEmailAsync(url, "api", "/Trips/GetTripByEmail", "bearer", token.Token, Email);
+            var response2 = await _apiService.GetTripByEmailAsync(url, "api", "/Trips/GetMyTrips", "bearer", token.Token, Email);
 
             if (!response2.IsSuccess)
             {

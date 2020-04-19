@@ -27,7 +27,7 @@ namespace VLegalizer.Web.Controllers.API
 
         }
 
-        [HttpPost]
+        /*[HttpPost]
         [Route("GetTripByEmail")]
         public async Task<IActionResult> GetTrip([FromBody]EmailRequest emailRequest)
         {
@@ -72,6 +72,26 @@ namespace VLegalizer.Web.Controllers.API
 
                 return Ok(response);
             }
+        }*/
+
+        [HttpPost]
+        [Route("GetMyTrips")]
+        public async Task<IActionResult> GetMyTripsAsync([FromBody] MyTripsRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var tripEntity = await _context.Trips
+                .Include(t => t.Employee)
+                .Include(t => t.TripDetails)
+                .Where(t => t.Employee.Email == request.Email &&
+                            t.StartDate >= request.StartDate)
+                .OrderByDescending(t => t.StartDate)
+                .ToListAsync();
+
+            return Ok(_converterHelper.ToTripResponse(tripEntity));
         }
 
         // GET: api/Trips/5
