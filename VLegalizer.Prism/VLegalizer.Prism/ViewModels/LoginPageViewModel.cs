@@ -91,7 +91,7 @@ namespace VLegalizer.Prism.ViewModels
             }
 
             var token = (TokenResponse)response.Result;
-            var response2 = await _apiService.GetTripByEmailAsync(url, "api", "/Trips/GetMyTrips", "bearer", token.Token, Email);
+            var response2 = await _apiService.GetTripByEmailAsync(url, "api", "/Trips/GetTripByEmail", "bearer", token.Token, Email);
 
             if (!response2.IsSuccess)
             {
@@ -100,10 +100,10 @@ namespace VLegalizer.Prism.ViewModels
                 return;
             }
 
-            var trip = (TripResponse)response2.Result;
+            var trips = (TripResponse)response2.Result;
             var parameters = new NavigationParameters
             {
-                { "trips",trip }
+                { "trips",trips }
             };
 
             IsRunning = false;

@@ -27,7 +27,7 @@ namespace VLegalizer.Web.Controllers.API
 
         }
 
-        /*[HttpPost]
+        [HttpPost]
         [Route("GetTripByEmail")]
         public async Task<IActionResult> GetTrip([FromBody]EmailRequest emailRequest)
         {
@@ -65,16 +65,16 @@ namespace VLegalizer.Web.Controllers.API
                         Date = td.Date,
                         Amount = td.Amount,
                         PicturePath = td.ImageFullPath,
-                        ExpenseType = td.ExpenseType.ExpenseNames
+                        IdExpenseType = td.ExpenseType.Id
                     }).ToList()
 
                 };
 
                 return Ok(response);
             }
-        }*/
+        }
 
-        [HttpPost]
+       /* [HttpPost]
         [Route("GetMyTrips")]
         public async Task<IActionResult> GetMyTripsAsync([FromBody] MyTripsRequest request)
         {
@@ -86,13 +86,14 @@ namespace VLegalizer.Web.Controllers.API
             var tripEntity = await _context.Trips
                 .Include(t => t.Employee)
                 .Include(t => t.TripDetails)
+                .ThenInclude(t => t.TripDetails)
                 .Where(t => t.Employee.Email == request.Email &&
                             t.StartDate >= request.StartDate)
                 .OrderByDescending(t => t.StartDate)
                 .ToListAsync();
 
             return Ok(_converterHelper.ToTripResponse(tripEntity));
-        }
+        }*/
 
         // GET: api/Trips/5
         [HttpGet("{id}")]
