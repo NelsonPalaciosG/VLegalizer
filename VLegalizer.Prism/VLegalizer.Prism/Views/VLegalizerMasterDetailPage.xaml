@@ -16,7 +16,7 @@
                 <ListView
                 	BackgroundColor="Transparent"
                 	ItemsSource="{Binding Menus}"
-                	HasUnevenRows="False"
+                	HasUnevenRows="True"
                 	SeparatorVisibility="Default">
                     <ListView.ItemTemplate>
                         <DataTemplate>

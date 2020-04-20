@@ -11,8 +11,8 @@
             <Color x:Key="ColorBackgroud">#BFCDD9</Color>
             <Color x:Key="ColorPrimary">#8697A6</Color>
             <Color x:Key="ColorSecondary">#51608C</Color>
-            <Color x:Key="ColorDanger">#51608C</Color>
-            <Color x:Key="ColorAccent">#0029FA</Color>
+            <Color x:Key="ColorDanger">#8C4F2B</Color>
+            <Color x:Key="ColorAccent">#8697A6</Color>
             <Color x:Key="ColorFont">#3D3D3D</Color>
             <Color x:Key="ColorFontInverse">#FFFFFF</Color>
 
@@ -20,7 +20,7 @@
             <Style TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource ColorAccent}" />
                 <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="CornerRadius" Value="15" />
                 <Setter Property="TextColor" Value="{StaticResource ColorFontInverse}" />
             </Style>
 
