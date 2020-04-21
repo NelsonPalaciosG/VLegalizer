@@ -15,7 +15,7 @@ namespace VLegalizer.Web.Helper
 
         Task AddUserToRoleAsync(EmployeeEntity user, string roleName);
 
-        Task<bool> IsUserInRoleAsync(EmployeeEntity user, string roleName);
+        Task<bool> IsUserInRoleAsync(EmployeeEntity user, string roleName); 
 
         Task<SignInResult> LoginAsync(LoginViewModel model);
 
@@ -23,6 +23,9 @@ namespace VLegalizer.Web.Helper
 
         Task<SignInResult> ValidatePasswordAsync(EmployeeEntity user, string password);
 
+        Task<string> GenerateEmailConfirmationTokenAsync(EmployeeEntity user);
+
+        Task<IdentityResult> ConfirmEmailAsync(EmployeeEntity user, string token);
 
 
     }

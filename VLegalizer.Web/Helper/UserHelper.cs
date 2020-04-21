@@ -80,5 +80,15 @@ namespace VLegalizer.Web.Helper
                 false);
         }
 
+        public async Task<IdentityResult> ConfirmEmailAsync(EmployeeEntity user, string token)
+        {
+            return await _employeeManager.ConfirmEmailAsync(user, token);
+        }
+
+        public async Task<string> GenerateEmailConfirmationTokenAsync(EmployeeEntity user)
+        {
+            return await _employeeManager.GenerateEmailConfirmationTokenAsync(user);
+        }
+
     }
 }

@@ -88,6 +88,9 @@ namespace VLegalizer.Web.Data
 
                 await _userHelper.AddUserAsync(user, "123456");
                 await _userHelper.AddUserToRoleAsync(user, userType.ToString());
+
+                var token = await _userHelper.GenerateEmailConfirmationTokenAsync(user);
+                await _userHelper.ConfirmEmailAsync(user, token);
             }
 
             return user;
@@ -114,7 +117,6 @@ namespace VLegalizer.Web.Data
                             Date = DateTime.UtcNow,
                             Description = "Pago hotel primera noche",
                             Amount = 150000,
-                            PicturePath = "",
                             ExpenseType = new ExpenseTypeEntity
                             {
                                 ExpenseNames = "Alojamiento"
@@ -126,7 +128,6 @@ namespace VLegalizer.Web.Data
                             Date = DateTime.UtcNow,
                             Description = "Restaurante XYZ",
                             Amount = 20000,
-                            PicturePath = "",
                             ExpenseType = new ExpenseTypeEntity
                             {
                                 ExpenseNames = "Almuerzo"
@@ -138,7 +139,6 @@ namespace VLegalizer.Web.Data
                             Date = DateTime.UtcNow,
                             Description = "Trayecto Casa - Aeropuerto",
                             Amount = 80000,
-                            PicturePath = "",
                             ExpenseType = new ExpenseTypeEntity
                             {
                                 ExpenseNames = "Taxi"
@@ -165,7 +165,6 @@ namespace VLegalizer.Web.Data
                             Date = DateTime.UtcNow,
                             Description = "Visita cliente minorista",
                             Amount = 15000,
-                            PicturePath = "",
                             ExpenseType = new ExpenseTypeEntity
                             {
                                 ExpenseNames = "Desayuno"
@@ -177,7 +176,6 @@ namespace VLegalizer.Web.Data
                             Date = DateTime.UtcNow,
                             Description = "Visita cliente centro",
                             Amount = 20000,
-                            PicturePath = "",
                             ExpenseType = new ExpenseTypeEntity
                             {
                                 ExpenseNames = "Media-mañana"
@@ -189,7 +187,6 @@ namespace VLegalizer.Web.Data
                             Date = DateTime.UtcNow,
                             Description = "Trayectos día",
                             Amount = 10000,
-                            PicturePath = "",
                             ExpenseType = new ExpenseTypeEntity
                             {
                                 ExpenseNames = "Bus"
@@ -215,7 +212,6 @@ namespace VLegalizer.Web.Data
                             Date = DateTime.UtcNow,
                             Description = "Visita cliente mayorista",
                             Amount = 15000,
-                            PicturePath = "",
                             ExpenseType = new ExpenseTypeEntity
                             {
                                 ExpenseNames = "Algo"
@@ -228,7 +224,6 @@ namespace VLegalizer.Web.Data
                             Date = DateTime.UtcNow,
                             Description = "Trayectos día",
                             Amount = 20000,
-                            PicturePath = "",
                             ExpenseType = new ExpenseTypeEntity
                             {
                                 ExpenseNames = "Picap"
