@@ -46,9 +46,12 @@ namespace VLegalizer.Prism.ViewModels
             _employee = JsonConvert.DeserializeObject<EmployeeResponse>(Settings.Employee);
             Trips = new List<TripItemViewModel>(_employee.Trips.Select(t => new TripItemViewModel(_navigationService)
             {
-                City = t.City
+                City = t.City,
+                StartDate = t.StartDate,
+                EndDate = t.EndDate,
+                TotalAmount = t.TotalAmount
 
-            }).ToList());
+            }).ToList());;
 
         }
 

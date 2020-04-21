@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="VLegalizer.Prism.Views.TripsPage"
+             x:Class="VLegalizer.Prism.Views.TripDetailsPage"
              Title="{Binding Title}">
-    
+
     <AbsoluteLayout>
         <StackLayout>
             <ListView 
@@ -73,5 +73,5 @@
             </ListView>
         </StackLayout>
     </AbsoluteLayout>
-  
+
 </ContentPage>

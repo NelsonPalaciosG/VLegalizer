@@ -27,7 +27,7 @@ namespace VLegalizer.Prism.ViewModels
         private async void SelectTrip()
         {
             Settings.Trips = JsonConvert.SerializeObject(this);//serializar un objeto a un string
-            await _navigationService.NavigateAsync("TripDetailsTabbedPage");
+            await _navigationService.NavigateAsync("TripDetailsPage");
         }
     }
 }

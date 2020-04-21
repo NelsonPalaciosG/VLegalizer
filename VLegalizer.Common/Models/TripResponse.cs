@@ -18,9 +18,12 @@ namespace VLegalizer.Common.Models
 
         public string City { get; set; }
 
+        public int TotalAmount { get; set; }
+
         public EmployeeResponse Employee { get; set; }
 
         public List<TripDetailResponse> TripDetails { get; set; }
+        
 
     }
 }

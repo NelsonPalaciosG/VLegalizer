@@ -2,9 +2,9 @@
 
 namespace VLegalizer.Prism.Views
 {
-    public partial class TripDetailsTabbedPage : TabbedPage
+    public partial class TripDetailsPage : ContentPage
     {
-        public TripDetailsTabbedPage()
+        public TripDetailsPage()
         {
             InitializeComponent();
         }

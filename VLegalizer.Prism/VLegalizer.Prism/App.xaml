@@ -8,17 +8,17 @@
         <ResourceDictionary>
             
             <!-- Colors -->
-            <Color x:Key="ColorBackgroud">#BFCDD9</Color>
-            <Color x:Key="ColorPrimary">#8697A6</Color>
-            <Color x:Key="ColorSecondary">#51608C</Color>
-            <Color x:Key="ColorDanger">#8C4F2B</Color>
-            <Color x:Key="ColorAccent">#8697A6</Color>
-            <Color x:Key="ColorFont">#3D3D3D</Color>
+            <Color x:Key="ColorBackgroud">#F2F2F2</Color>
+            <Color x:Key="ColorPrimary">#8BBBD9</Color>
+            <Color x:Key="ColorSecondary">#658DA6</Color>
+            <Color x:Key="ColorDanger">#405F73</Color>
+            <Color x:Key="ColorAccent">#021526</Color>
+            <Color x:Key="ColorFont">#000000</Color>
             <Color x:Key="ColorFontInverse">#FFFFFF</Color>
 
             <!-- Styles -->
             <Style TargetType="Button">
-                <Setter Property="BackgroundColor" Value="{StaticResource ColorAccent}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource ColorPrimary}" />
                 <Setter Property="HorizontalOptions" Value="FillAndExpand" />
                 <Setter Property="CornerRadius" Value="15" />
                 <Setter Property="TextColor" Value="{StaticResource ColorFontInverse}" />
