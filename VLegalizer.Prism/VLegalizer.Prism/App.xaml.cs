@@ -34,6 +34,7 @@ namespace VLegalizer.Prism
             containerRegistry.RegisterForNavigation<VLegalizerMasterDetailPage, VLegalizerMasterDetailPageViewModel>();
             containerRegistry.RegisterForNavigation<AccountPage, AccountPageViewModel>();
             containerRegistry.RegisterForNavigation<AddTripPage, AddTripPageViewModel>();
+            containerRegistry.RegisterForNavigation<TripDetailsTabbedPage, TripDetailsTabbedPageViewModel>();
         }
     }
 }

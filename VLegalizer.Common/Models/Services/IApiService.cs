@@ -7,7 +7,7 @@ namespace VLegalizer.Common.Models.Services
 {
     public interface IApiService
     {
-        Task<Response> GetTripByEmailAsync(
+        Task<Response<EmployeeResponse>> GetTripByEmailAsync(
             string urlBase,
             string servicePrefix,
             string controller,
@@ -15,7 +15,7 @@ namespace VLegalizer.Common.Models.Services
             string accessToken,
             string email);
 
-        Task<Response> GetTokenAsync(
+        Task<Response<TokenResponse>> GetTokenAsync(
             string urlBase,
             string servicePrefix,
             string controller,

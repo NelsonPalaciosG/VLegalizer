@@ -37,37 +37,36 @@ namespace VLegalizer.Web.Controllers.API
                     return BadRequest();
                 }
 
-                var tripEntity = await _context.Trips
-                    .Include(t => t.Employee)
-                    .Include(t => t.TripDetails)
+                var EmployeeEntity = await _context.Employees
+                    .Include(t => t.Trips)
+                    .ThenInclude(td => td.TripDetails)
                     .ThenInclude(e => e.ExpenseType)
-                    .FirstOrDefaultAsync(t => t.Employee.Email.ToLower() == emailRequest.Email.ToLower());
-                var response = new TripResponse
+                    .FirstOrDefaultAsync(t => t.Email.ToLower() == emailRequest.Email.ToLower());
+
+                var response = new EmployeeResponse
                 {
-                    Employee = new EmployeeResponse
+                    Document = EmployeeEntity.Document,
+                    FirstName = EmployeeEntity.FirstName,
+                    LastName = EmployeeEntity.LastName,
+                    FixedPhone = EmployeeEntity.FixedPhone,
+                    CellPhone = EmployeeEntity.CellPhone,
+                    Address = EmployeeEntity.Address,
+                    UserType = EmployeeEntity.UserType,
+                    Trips = EmployeeEntity.Trips?.Select(t => new TripResponse
                     {
-                        Document = tripEntity.Employee.Document,
-                        FirstName = tripEntity.Employee.FirstName,
-                        LastName = tripEntity.Employee.LastName,
-                        FixedPhone = tripEntity.Employee.FixedPhone,
-                        CellPhone = tripEntity.Employee.CellPhone,
-                        Address = tripEntity.Employee.Address,
-                        UserType = tripEntity.Employee.UserType,
-                    },
-
-                    Id = tripEntity.Id,
-                    StartDate = tripEntity.StartDate,
-                    EndDate = tripEntity.EndDate,
-                    City = tripEntity.City,
-                    TripDetails = tripEntity.TripDetails.Select(td => new TripDetailResponse
-                    {
-                        Id = td.Id,
-                        Date = td.Date,
-                        Amount = td.Amount,
-                        PicturePath = td.ImageFullPath,
-                        IdExpenseType = td.ExpenseType.Id
-                    }).ToList()
-
+                        Id = t.Id,
+                        StartDate = t.StartDate,
+                        EndDate = t.EndDate,
+                        City = t.City,
+                        TripDetails = t.TripDetails.Select(td => new TripDetailResponse
+                        {
+                            Id = td.Id,
+                            Date = td.Date,
+                            Amount = td.Amount,
+                            PicturePath = td.ImageFullPath,
+                            IdExpenseType = td.ExpenseType.Id
+                        }).ToList()
+                    }).ToList(),
                 };
 
                 return Ok(response);

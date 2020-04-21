@@ -10,7 +10,7 @@ namespace VLegalizer.Common.Models.Services
 {
     public class ApiService : IApiService
     {
-        public async Task<Response> GetTokenAsync(
+        public async Task<Response<TokenResponse>> GetTokenAsync(
             string urlBase,
             string servicePrefix,
             string controller,
@@ -31,7 +31,7 @@ namespace VLegalizer.Common.Models.Services
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    return new Response
+                    return new Response<TokenResponse>
                     {
                         IsSuccess = false,
                         Message = result,
@@ -39,7 +39,7 @@ namespace VLegalizer.Common.Models.Services
                 }
 
                 var token = JsonConvert.DeserializeObject<TokenResponse>(result);
-                return new Response
+                return new Response<TokenResponse>
                 {
                     IsSuccess = true,
                     Result = token
@@ -47,7 +47,7 @@ namespace VLegalizer.Common.Models.Services
             }
             catch (Exception ex)
             {
-                return new Response
+                return new Response<TokenResponse>
                 {
                     IsSuccess = false,
                     Message = ex.Message
@@ -55,7 +55,7 @@ namespace VLegalizer.Common.Models.Services
             }
         }
 
-        public async Task<Response> GetTripByEmailAsync(
+        public async Task<Response<EmployeeResponse>> GetTripByEmailAsync(
             string urlBase,
             string servicePrefix,
             string controller,
@@ -80,15 +80,15 @@ namespace VLegalizer.Common.Models.Services
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    return new Response
+                    return new Response<EmployeeResponse>
                     {
                         IsSuccess = false,
                         Message = result,
                     };
                 }
 
-                var trip = JsonConvert.DeserializeObject<TripResponse>(result);
-                return new Response
+                var trip = JsonConvert.DeserializeObject<EmployeeResponse>(result);
+                return new Response<EmployeeResponse>
                 {
                     IsSuccess = true,
                     Result = trip
@@ -96,7 +96,7 @@ namespace VLegalizer.Common.Models.Services
             }
             catch (Exception ex)
             {
-                return new Response
+                return new Response<EmployeeResponse>
                 {
                     IsSuccess = false,
                     Message = ex.Message

@@ -90,5 +90,19 @@ namespace VLegalizer.Web.Helper
             return await _employeeManager.GenerateEmailConfirmationTokenAsync(user);
         }
 
+        public async Task<string> GeneratePasswordResetTokenAsync(EmployeeEntity user)
+        {
+            return await _employeeManager.GeneratePasswordResetTokenAsync(user);
+        }
+
+        public async Task<IdentityResult> UpdateUserAsync(EmployeeEntity user)
+        {
+            return await _employeeManager.UpdateAsync(user);
+        }
+
+        public async Task<IdentityResult> ChangePasswordAsync(EmployeeEntity user, string oldPassword, string newPassword)
+        {
+            return await _employeeManager.ChangePasswordAsync(user, oldPassword, newPassword);
+        }
     }
 }

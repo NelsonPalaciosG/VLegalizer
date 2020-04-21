@@ -1,9 +1,11 @@
-﻿using Prism.Commands;
+﻿using Newtonsoft.Json;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using VLegalizer.Common.Helpers;
 using VLegalizer.Common.Models;
 using VLegalizer.Common.Models.Services;
 
@@ -100,16 +102,16 @@ namespace VLegalizer.Prism.ViewModels
                 return;
             }
 
-            var trips = (TripResponse)response2.Result;
-            var parameters = new NavigationParameters
-            {
-                { "trips",trips }
-            };
+            var trips = (EmployeeResponse)response2.Result;
+            Settings.Employee = JsonConvert.SerializeObject(trips);
+            Settings.Token = JsonConvert.SerializeObject(token);
+            Settings.IsLogin = true;
+
 
             IsRunning = false;
             IsEnabled = true;
 
-            await _navigationService.NavigateAsync("/VLegalizerMasterDetailPage/NavigationPage/TripsPage", parameters);
+            await _navigationService.NavigateAsync("/VLegalizerMasterDetailPage/NavigationPage/TripsPage");
             Password = string.Empty;
 
         }

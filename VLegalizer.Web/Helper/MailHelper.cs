@@ -9,51 +9,45 @@ namespace VLegalizer.Web.Helper
 {
     public class MailHelper : IMailHelper
     {
+        
         private readonly IConfiguration _configuration;
+
+
 
         public MailHelper(IConfiguration configuration)
         {
             _configuration = configuration;
         }
 
-        public Response SendMail(string to, string subject, string body)
+
+
+        public void SendMail(string to, string subject, string body)
         {
-            try
+            var from = _configuration["Mail:From"];
+            var smtp = _configuration["Mail:Smtp"];
+            var port = _configuration["Mail:Port"];
+            var password = _configuration["Mail:Password"];
+
+
+
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress(from));
+            message.To.Add(new MailboxAddress(to));
+            message.Subject = subject;
+            var bodyBuilder = new BodyBuilder
             {
-                string from = _configuration["Mail:From"];
-                string smtp = _configuration["Mail:Smtp"];
-                string port = _configuration["Mail:Port"];
-                string password = _configuration["Mail:Password"];
+                HtmlBody = body
+            };
+            message.Body = bodyBuilder.ToMessageBody();
 
-                MimeMessage message = new MimeMessage();
-                message.From.Add(new MailboxAddress(from));
-                message.To.Add(new MailboxAddress(to));
-                message.Subject = subject;
-                BodyBuilder bodyBuilder = new BodyBuilder
-                {
-                    HtmlBody = body
-                };
-                message.Body = bodyBuilder.ToMessageBody();
 
-                using (SmtpClient client = new SmtpClient())
-                {
-                    client.Connect(smtp, int.Parse(port), false);
-                    client.Authenticate(from, password);
-                    client.Send(message);
-                    client.Disconnect(true);
-                }
 
-                return new Response { IsSuccess = true };
-
-            }
-            catch (Exception ex)
+            using (var client = new SmtpClient())
             {
-                return new Response
-                {
-                    IsSuccess = false,
-                    Message = ex.Message,
-                    Result = ex
-                };
+                client.Connect(smtp, int.Parse(port), false);
+                client.Authenticate(from, password);
+                client.Send(message);
+                client.Disconnect(true);
             }
         }
     }

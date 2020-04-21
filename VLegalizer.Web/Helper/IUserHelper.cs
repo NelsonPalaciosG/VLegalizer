@@ -27,6 +27,11 @@ namespace VLegalizer.Web.Helper
 
         Task<IdentityResult> ConfirmEmailAsync(EmployeeEntity user, string token);
 
+        Task<string> GeneratePasswordResetTokenAsync(EmployeeEntity user);
+
+        Task<IdentityResult> UpdateUserAsync(EmployeeEntity user);
+
+        Task<IdentityResult> ChangePasswordAsync(EmployeeEntity user, string oldPassword, string newPassword);
 
     }
 }

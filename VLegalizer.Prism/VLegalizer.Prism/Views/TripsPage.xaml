@@ -7,17 +7,52 @@
              BackgroundColor="{StaticResource ColorBackgroud}"
              Title="{Binding Title}">
     
-    <AbsoluteLayout>
-        <StackLayout
-            Padding="10">
-            <Label
-        	    Text="City"/>
-            <Entry
-        	    Text="{Binding Trip.City}"/>
-            <Label></Label>
+        <StackLayout Padding="10">
+            <ListView 
+                HasUnevenRows="true" 
+                IsPullToRefreshEnabled="true"
+                ItemsSource="{Binding Trips}"
+                SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame
+                                CornerRadius="20"
+                                HasShadow="true"
+                                Margin="5">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectTripCommand}"/>
+                                </Frame.GestureRecognizers>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout 
+                                        Grid.Column="0"
+                                        VerticalOptions="Center">
+                                        <Label 
+                                            FontAttributes="Bold"
+                                            FontSize="Medium" 
+                                            Text="{Binding City}">
+                                        </Label>
+                                        <Label 
+                                            Text="carola la suya mk">
+                                        </Label>
+                                        <Label
+                                        Text="Me llamo carola">
 
- 
+                                        </Label>
+                                        <Label
+                                        Text="fadfasdf">
+                                        </Label>
+                                    </StackLayout>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
-    </AbsoluteLayout>
+
   
 </ContentPage>

@@ -1,9 +1,11 @@
-﻿using Prism.Commands;
+﻿using Newtonsoft.Json;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using VLegalizer.Common.Helpers;
 using VLegalizer.Common.Models;
 using VLegalizer.Common.Models.Services;
 
@@ -13,7 +15,8 @@ namespace VLegalizer.Prism.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
-        private TripResponse _trip;
+        private EmployeeResponse _employee;
+        private List<TripItemViewModel> _trips;
         private bool _isRunning;
 
         public TripsPageViewModel(
@@ -23,6 +26,7 @@ namespace VLegalizer.Prism.ViewModels
             _navigationService = navigationService;
             _apiService = apiService;
             Title = "Trips";
+            LoadTrips();
         }
 
         public bool IsRunning
@@ -31,16 +35,22 @@ namespace VLegalizer.Prism.ViewModels
             set => SetProperty(ref _isRunning, value);
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        public List<TripItemViewModel> Trips
         {
-            base.OnNavigatedTo(parameters);
-
-            if (parameters.ContainsKey("trip"))
-            {
-                _trip = parameters.GetValue<TripResponse>("trip");
-
-
-            }
+            get => _trips;
+            set => SetProperty(ref _trips, value);
         }
-      }
+
+        private void LoadTrips()
+        {
+            _employee = JsonConvert.DeserializeObject<EmployeeResponse>(Settings.Employee);
+            Trips = new List<TripItemViewModel>(_employee.Trips.Select(t => new TripItemViewModel(_navigationService)
+            {
+                City = t.City
+
+            }).ToList());
+
+        }
+
+    }
 }
