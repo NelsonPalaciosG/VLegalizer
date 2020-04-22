@@ -8,41 +8,75 @@
              Title="{Binding Title}">
 
     <AbsoluteLayout>
-        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
                      AbsoluteLayout.LayoutFlags="All" 
                      Padding="10">
-            <StackLayout
-            Padding="5">
-                <ListView
-                HasUnevenRows="true"
-                ItemsSource="{Binding TripDetails}">
+            <StackLayout  VerticalOptions="CenterAndExpand">
+                <ListView 
+                HasUnevenRows="true" 
+                IsPullToRefreshEnabled="true"
+                ItemsSource="{Binding TripDetails}"
+                SeparatorVisibility="None">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="3*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Label
-                                    Grid.Column="0"
-                                    Text="{Binding Date}"
-                                    VerticalOptions="Center">
-                                    </Label>
-                                    <Label
-                                    Grid.Column="1"
-                                    Text="{Binding Amount}"
-                                    VerticalOptions="Center">
-                                    </Label>
-                                    <Label
-                                    Grid.Column="2"
-                                    FontSize="40"
-                                    Text="{Binding IdExpenseType}">
-                                    </Label>
-                                </Grid>
+                                <Frame
+                                CornerRadius="10"
+                                HasShadow="true"
+                                Margin="6"
+                                BackgroundColor="{StaticResource ColorPrimary}">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding SelectTripCommand}"/>
+                                    </Frame.GestureRecognizers>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackLayout 
+                                        Grid.Column="0">
+                                            <Label 
+                                            FontAttributes="Bold"
+                                            FontSize="Medium" 
+                                            Text="{Binding ExpenseName}"
+                                            TextColor="{StaticResource ColorFontInverse}">
+                                            </Label>
+                                            <Label 
+                                            Text="{Binding Description}"
+                                            LineBreakMode="TailTruncation"
+                                            FontAttributes="Italic" 
+                                            FontSize="Small" 
+                                            VerticalOptions="End">
+                                            </Label>
+                                            <Label
+                                            Text="{Binding Date, StringFormat='{0:dd/MM/yyyy}'}"
+                                            FontAttributes="Italic" 
+                                            FontSize="Small">
+                                            </Label>
+                                        </StackLayout>
+                                        <StackLayout 
+                                        Grid.Column="1">
+                                            <Label>
+                                            </Label>
+                                            <Label
+                                        Text="{Binding Amount, StringFormat='{0:C0}'}"
+                                            FontAttributes="Bold">
+                                            </Label>
+                                            <Label>
+                                            </Label>
+                                        </StackLayout>
+                                        <Image  
+                                        Grid.Column="2"
+                                        Source="ic_format_list_bulleted">
+                                        </Image>
+                                    </Grid>
+
+                                </Frame>
                             </ViewCell>
+
                         </DataTemplate>
+
                     </ListView.ItemTemplate>
                 </ListView>
             </StackLayout>
