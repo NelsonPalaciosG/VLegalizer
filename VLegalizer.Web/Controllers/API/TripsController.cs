@@ -63,8 +63,10 @@ namespace VLegalizer.Web.Controllers.API
                             Id = td.Id,
                             Date = td.Date,
                             Amount = td.Amount,
+                            Description = td.Description,
                             PicturePath = td.ImageFullPath,
-                            IdExpenseType = td.ExpenseType.Id
+                            IdExpenseType = td.ExpenseType.Id,
+                            ExpenseName = td.ExpenseType.ExpenseNames
                         }).ToList()
                     }).ToList(),
                 };

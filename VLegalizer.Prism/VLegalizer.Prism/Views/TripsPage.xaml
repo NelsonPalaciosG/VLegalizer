@@ -57,12 +57,13 @@
                                         </StackLayout>
                                         <StackLayout 
                                         Grid.Column="1">
+                                            <Label>
+                                            </Label>
                                             <Label
                                         Text="{Binding TotalAmount, StringFormat='{0:C0}'}"
-                                            LineBreakMode="TailTruncation"
-                                            FontAttributes="Bold" 
-                                            FontSize="Medium" 
-                                            VerticalOptions="End">
+                                            FontAttributes="Bold">
+                                            </Label>
+                                            <Label>
                                             </Label>
                                         </StackLayout>
                                         <Image  

@@ -50,7 +50,8 @@ namespace VLegalizer.Prism.ViewModels
                 City = t.City,
                 StartDate = t.StartDate,
                 EndDate = t.EndDate,
-                TotalAmount = t.TotalAmount
+                TotalAmount = t.TripDetails.Sum(td => td.Amount),
+                TripDetails = t.TripDetails
 
             }).ToList());;
 
