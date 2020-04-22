@@ -8,6 +8,7 @@ using System.Linq;
 using VLegalizer.Common.Helpers;
 using VLegalizer.Common.Models;
 using VLegalizer.Common.Models.Services;
+using VLegalizer.Prism.Helpers;
 
 namespace VLegalizer.Prism.ViewModels
 {
@@ -27,7 +28,7 @@ namespace VLegalizer.Prism.ViewModels
         {
             _navigationService = navigationService;
             _apiService = apiService;
-            Title = "Login";
+            Title = Languages.Login;
             IsEnabled = true;
         }
 
@@ -59,13 +60,13 @@ namespace VLegalizer.Prism.ViewModels
         {
             if (string.IsNullOrEmpty(Email))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must enter an email.", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.Enter_email, Languages.Accept);
                 return;
             }
 
             if (string.IsNullOrEmpty(Password))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must enter a password.", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.Enter_password, Languages.Accept);
                 return;
             }
 
@@ -86,7 +87,7 @@ namespace VLegalizer.Prism.ViewModels
 
             if (!response.IsSuccess)
             {
-                await App.Current.MainPage.DisplayAlert("Error", "User or password are incorrect.", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.Error2, Languages.Accept);
                 Password = string.Empty;
                 return;
 
@@ -97,7 +98,7 @@ namespace VLegalizer.Prism.ViewModels
 
             if (!response2.IsSuccess)
             {
-                await App.Current.MainPage.DisplayAlert("Error", "This user have a big problem, call support.", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.Error3, Languages.Accept);
                 Password = string.Empty;
                 return;
             }

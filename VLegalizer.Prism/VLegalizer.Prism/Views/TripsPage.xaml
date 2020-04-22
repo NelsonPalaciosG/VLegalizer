@@ -2,76 +2,89 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:i18n="clr-namespace:VLegalizer.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="VLegalizer.Prism.Views.TripsPage"
              Title="{Binding Title}">
     
     <AbsoluteLayout>
-        <StackLayout>
-            <ListView 
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     AbsoluteLayout.LayoutFlags="All" 
+                     Padding="10">
+            <StackLayout  VerticalOptions="CenterAndExpand">
+                <ListView 
                 HasUnevenRows="true" 
                 IsPullToRefreshEnabled="true"
                 ItemsSource="{Binding Trips}"
                 SeparatorVisibility="None">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Frame
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame
                                 CornerRadius="10"
                                 HasShadow="true"
                                 Margin="6"
                                 BackgroundColor="{StaticResource ColorPrimary}">
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding SelectTripCommand}"/>
-                                </Frame.GestureRecognizers>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <StackLayout 
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding SelectTripCommand}"/>
+                                    </Frame.GestureRecognizers>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackLayout 
                                         Grid.Column="0">
-                                        <Label 
+                                            <Label 
                                             FontAttributes="Bold"
                                             FontSize="Medium" 
                                             Text="{Binding City}"
                                             TextColor="{StaticResource ColorFontInverse}">
-                                        </Label>
-                                        <Label 
+                                            </Label>
+                                            <Label 
                                             Text="{Binding StartDateLocal, StringFormat='{0:dd/MM/yyyy}'}"
                                             LineBreakMode="TailTruncation"
                                             FontAttributes="Italic" 
                                             FontSize="Small" 
                                             VerticalOptions="End">
-                                        </Label>
-                                        <Label
+                                            </Label>
+                                            <Label
                                             Text="{Binding EndDateLocal, StringFormat='{0:dd/MM/yyyy}'}"
                                             FontAttributes="Italic" 
                                             FontSize="Small">
-                                        </Label>
-                                    </StackLayout>
-                                    <StackLayout 
+                                            </Label>
+                                        </StackLayout>
+                                        <StackLayout 
                                         Grid.Column="1">
-                                        <Label
+                                            <Label
                                         Text="{Binding TotalAmount, StringFormat='{0:C0}'}"
                                             LineBreakMode="TailTruncation"
                                             FontAttributes="Bold" 
                                             FontSize="Medium" 
                                             VerticalOptions="End">
-                                        </Label>
-                                    </StackLayout>
-                                    <Image  
+                                            </Label>
+                                        </StackLayout>
+                                        <Image  
                                         Grid.Column="2"
                                         Source="ic_format_list_bulleted">
-                                    </Image>
-                                </Grid>
-                            </Frame>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                                        </Image>
+                                    </Grid>
+
+                                </Frame>
+                            </ViewCell>
+
+                        </DataTemplate>
+
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            <Button Command="{Binding RegisterCommand}" 
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="{i18n:Translate Add_trip}"
+                        Style="{StaticResource SecondaryButton}"/>
         </StackLayout>
+
     </AbsoluteLayout>
   
 </ContentPage>

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:i18n="clr-namespace:VLegalizer.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="VLegalizer.Prism.Views.LoginPage"
              Title="{Binding Title}">
@@ -24,27 +25,27 @@
                     <Label Grid.Column="0" 
                            Grid.Row="0"
                            HorizontalTextAlignment="End"
-                           Text="Email"
+                           Text="{i18n:Translate Email}"
                            VerticalOptions="Center"/>
                     <Entry Grid.Column="1"
                            Grid.Row="0"
-                           Keyboard="Email"
-                           Placeholder="example@domain.com"
+                           Keyboard="{i18n:Translate Email}"
+                           Placeholder="{i18n:Translate Email2}"
                            Text="{Binding Email}"/>
                     <Label Grid.Column="0" 
                            Grid.Row="1"
                            HorizontalTextAlignment="End"
-                           Text="Password"
+                           Text="{i18n:Translate Password}"
                            VerticalOptions="Center"/>
                     <Entry Grid.Column="1"
                            Grid.Row="1"
                            IsPassword="True"
-                           Placeholder="Enter your password"
+                           Placeholder="{i18n:Translate Password2}"
                            Text="{Binding Password}"/>
                 </Grid>
                 <Label FontAttributes="Bold"
                        HorizontalOptions="Center" 
-                       Text="ForgotPassword">
+                       Text="{i18n:Translate ForgotPassword}">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}"/>
                     </Label.GestureRecognizers>
@@ -53,10 +54,10 @@
             <StackLayout>
                 <Button Command="{Binding LoginCommand}" 
                         IsEnabled="{Binding IsEnabled}"
-                        Text="Login"/>
+                        Text="{i18n:Translate Login}"/>
                 <Button Command="{Binding RegisterCommand}" 
                         IsEnabled="{Binding IsEnabled}"
-                        Text="Register"
+                        Text="{i18n:Translate Register}"
                         Style="{StaticResource SecondaryButton}"/>
             </StackLayout>
         </StackLayout>

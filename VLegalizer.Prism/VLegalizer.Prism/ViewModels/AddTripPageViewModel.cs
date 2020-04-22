@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using VLegalizer.Common.Models.Services;
+using VLegalizer.Prism.Helpers;
 
 namespace VLegalizer.Prism.ViewModels
 {
@@ -17,7 +18,7 @@ namespace VLegalizer.Prism.ViewModels
             IApiService apiService) : base(navigationService)
         {
             _navigationService = navigationService;
-            Title = "Add new trip";
+            Title = Languages.Add_trip;
         }
 
 

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using VLegalizer.Common.Models;
+using VLegalizer.Prism.Helpers;
 
 namespace VLegalizer.Prism.ViewModels
 {
@@ -29,21 +30,21 @@ namespace VLegalizer.Prism.ViewModels
                 {
                     Icon = "ic_card_travel",
                     PageName = "TripsPage",
-                    Title = "My trips"
+                    Title = Languages.Trips
                 },
 
                 new Menu
                 {
                     Icon = "ic_add_circle",
                     PageName = "AddTripPage",
-                    Title = "Add new trip"
+                    Title = Languages.Add_trip
                 },
 
                 new Menu
                 {
                     Icon = "ic_account_circle",
                     PageName = "AccountPage",
-                    Title = "Admin my account"
+                    Title = Languages.Account
                 },
 
 
@@ -51,7 +52,7 @@ namespace VLegalizer.Prism.ViewModels
                 {
                     Icon = "ic_exit_to_app",
                     PageName = "LoginPage",
-                    Title = "Logout"
+                    Title = Languages.Logout
                 }
             };
 

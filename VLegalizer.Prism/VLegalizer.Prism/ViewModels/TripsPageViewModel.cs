@@ -8,6 +8,7 @@ using System.Linq;
 using VLegalizer.Common.Helpers;
 using VLegalizer.Common.Models;
 using VLegalizer.Common.Models.Services;
+using VLegalizer.Prism.Helpers;
 
 namespace VLegalizer.Prism.ViewModels
 {
@@ -25,7 +26,7 @@ namespace VLegalizer.Prism.ViewModels
         {
             _navigationService = navigationService;
             _apiService = apiService;
-            Title = "Trips";
+            Title = Languages.Trips;
             LoadTrips();
         }
 

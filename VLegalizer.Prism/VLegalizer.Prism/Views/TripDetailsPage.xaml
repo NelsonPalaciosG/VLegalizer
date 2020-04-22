@@ -1,13 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com"
+             xmlns:prism="http://prismlibrary.com"           
+             xmlns:i18n="clr-namespace:VLegalizer.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="VLegalizer.Prism.Views.TripDetailsPage"
              Title="{Binding Title}">
 
     <AbsoluteLayout>
-        <StackLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     AbsoluteLayout.LayoutFlags="All" 
+                     Padding="10">
+            <StackLayout  VerticalOptions="CenterAndExpand">
             <ListView 
                 HasUnevenRows="true" 
                 IsPullToRefreshEnabled="true"
@@ -70,7 +74,12 @@
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>
+                </ListView> 
+            </StackLayout>
+            <Button Command="{Binding RegisterCommand}" 
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="{i18n:Translate Add_details}"
+                        Style="{StaticResource SecondaryButton}"/>
         </StackLayout>
     </AbsoluteLayout>
 

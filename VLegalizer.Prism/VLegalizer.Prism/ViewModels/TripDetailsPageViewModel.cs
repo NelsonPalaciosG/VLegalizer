@@ -4,6 +4,7 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using VLegalizer.Prism.Helpers;
 
 namespace VLegalizer.Prism.ViewModels
 {
@@ -16,7 +17,7 @@ namespace VLegalizer.Prism.ViewModels
         {
             _navigationService = navigationService;
 
-            Title = "Trip details";
+            Title = Languages.Trip_details;
 
 
         }

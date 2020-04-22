@@ -4,6 +4,7 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using VLegalizer.Prism.Helpers;
 
 namespace VLegalizer.Prism.ViewModels
 {
@@ -15,7 +16,7 @@ namespace VLegalizer.Prism.ViewModels
             INavigationService navigationService) : base(navigationService)
         {
             _navigationService = navigationService;
-            Title = "Account";
+            Title = Languages.Account;
         }
     }
 }
