@@ -2,9 +2,13 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using VLegalizer.Common.Enums;
 using VLegalizer.Common.Models;
+using VLegalizer.Prism.Resources;
 using VLegalizer.Web.Data;
 using VLegalizer.Web.Data.Entities;
 using VLegalizer.Web.Helper;
@@ -45,6 +49,9 @@ namespace VLegalizer.Web.Controllers.API
             }
 
 
+            CultureInfo cultureInfo = new CultureInfo(request.CultureInfo);
+            Resource.Culture = cultureInfo;
+
 
             EmployeeEntity employee = await _userHelper.GetUserByEmailAsync(request.Email);
             if (employee != null)
@@ -52,10 +59,9 @@ namespace VLegalizer.Web.Controllers.API
                 return BadRequest(new Response<object>
                 {
                     IsSuccess = false,
-                    Message = "This email is already registered."
-                });
+                    Message = Resource.Email_exist
+                });;
             }
-
 
 
             employee = new EmployeeEntity
@@ -94,20 +100,18 @@ namespace VLegalizer.Web.Controllers.API
                 LastName = request.LastName,
                 FixedPhone = request.FixedPhone,
                 CellPhone = request.CellPhone,
-                UserName = request.Email
-
+                UserName = request.Email,
+                UserType = UserType.Employee
             });
+
+
           
-
-
             await _dataContext.SaveChangesAsync();
-
-
 
             var myToken = await _userHelper.GenerateEmailConfirmationTokenAsync(employee);
             string tokenLink = Url.Action("ConfirmEmail", "Account", new
             {
-                userid = employee.Id,
+                employeeid = employee.Id,
                 token = myToken
             }, protocol: HttpContext.Request.Scheme);
 
@@ -127,7 +131,6 @@ namespace VLegalizer.Web.Controllers.API
         }
 
 
-
         [HttpPost]
         [Route("RecoverPassword")]
         public async Task<IActionResult> RecoverPassword([FromBody] EmailRequest request)
@@ -143,8 +146,8 @@ namespace VLegalizer.Web.Controllers.API
 
 
 
-            EmployeeEntity user = await _userHelper.GetUserByEmailAsync(request.Email);
-            if (user == null)
+            EmployeeEntity employee = await _userHelper.GetUserByEmailAsync(request.Email);
+            if (employee == null)
             {
                 return BadRequest(new Response<object>
                 {
@@ -155,7 +158,7 @@ namespace VLegalizer.Web.Controllers.API
 
 
 
-            var myToken = await _userHelper.GeneratePasswordResetTokenAsync(user);
+            var myToken = await _userHelper.GeneratePasswordResetTokenAsync(employee);
             string link = Url.Action("ResetPassword", "Account", new { token = myToken }, protocol: HttpContext.Request.Scheme);
             _mailHelper.SendMail(request.Email, "Password Reset", $"<h1>Recover Password</h1>" +
                 $"To reset the password click in this link:</br></br>" +
@@ -208,8 +211,8 @@ namespace VLegalizer.Web.Controllers.API
 
 
 
-            var updatedUser = await _userHelper.GetUserByEmailAsync(request.Email);
-            return Ok(updatedUser);
+            var updatedEmployee = await _userHelper.GetUserByEmailAsync(request.Email);
+            return Ok(updatedEmployee);
         }
 
 
@@ -230,8 +233,8 @@ namespace VLegalizer.Web.Controllers.API
 
 
 
-            var user = await _userHelper.GetUserByEmailAsync(request.Email);
-            if (user == null)
+            var employee = await _userHelper.GetUserByEmailAsync(request.Email);
+            if (employee == null)
             {
                 return BadRequest(new Response<object>
                 {
@@ -242,7 +245,7 @@ namespace VLegalizer.Web.Controllers.API
 
 
 
-            var result = await _userHelper.ChangePasswordAsync(user, request.OldPassword, request.NewPassword);
+            var result = await _userHelper.ChangePasswordAsync(employee, request.OldPassword, request.NewPassword);
             if (!result.Succeeded)
             {
                 return BadRequest(new Response<object>

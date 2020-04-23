@@ -117,8 +117,10 @@ namespace VLegalizer.Prism.ViewModels
 
         }
 
-        private void RegisterAsync()
+        private async void RegisterAsync()
         {
+            await _navigationService.NavigateAsync("RegisterPage");
+
         }
     }
 }

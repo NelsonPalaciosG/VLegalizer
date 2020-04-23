@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\VLegalizer.Common\VLegalizer.Common.csproj" />
+    <ProjectReference Include="..\VLegalizer.Prism\VLegalizer.Prism\VLegalizer.Prism.csproj" />
   </ItemGroup>
 
 </Project>

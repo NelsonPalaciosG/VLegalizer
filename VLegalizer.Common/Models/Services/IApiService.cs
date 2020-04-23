@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace VLegalizer.Common.Models.Services
 {
@@ -20,6 +17,13 @@ namespace VLegalizer.Common.Models.Services
             string servicePrefix,
             string controller,
             TokenRequest request);
+
+        Task<Response<object>> RegisterUserAsync(
+            string urlBase,
+            string servicePrefix,
+            string controller,
+            EmployeeRequest employeeRequest);
+
     }
 
 }

@@ -177,4 +177,58 @@
   <data name="Trips" xml:space="preserve">
     <value>Mis Viajes</value>
   </data>
+  <data name="Email_exist" xml:space="preserve">
+    <value>El Email ya está registrado</value>
+  </data>
+  <data name="Register2" xml:space="preserve">
+    <value>Registre nuevo empleado</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Dirección</value>
+  </data>
+  <data name="Address2" xml:space="preserve">
+    <value>Introduzca su dirección</value>
+  </data>
+  <data name="CellPhone" xml:space="preserve">
+    <value>Teléfono móvil</value>
+  </data>
+  <data name="Document" xml:space="preserve">
+    <value>Documento</value>
+  </data>
+  <data name="Document2" xml:space="preserve">
+    <value>Ingrese su número de documento</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="FirstName2" xml:space="preserve">
+    <value>Introduce tu nombre</value>
+  </data>
+  <data name="FixedPhone" xml:space="preserve">
+    <value>Teléfono fijo</value>
+  </data>
+  <data name="FixedPhone2" xml:space="preserve">
+    <value>Escribir el número de teléfono</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Apellidos</value>
+  </data>
+  <data name="LastName2" xml:space="preserve">
+    <value>Escribe tu apellido</value>
+  </data>
+  <data name="PasswordConfirm" xml:space="preserve">
+    <value>Confirmar contraseña</value>
+  </data>
+  <data name="PasswordConfirm2" xml:space="preserve">
+    <value>Confirme su contraseña</value>
+  </data>
+  <data name="Registering" xml:space="preserve">
+    <value>Registrando</value>
+  </data>
+  <data name="PasswordLength" xml:space="preserve">
+    <value>La contraseña debe tener al menos 6 caracteres</value>
+  </data>
+  <data name="PasswordnoMatch" xml:space="preserve">
+    <value>La contraseña y la confirmación de contraseña no coinciden</value>
+  </data>
 </root>

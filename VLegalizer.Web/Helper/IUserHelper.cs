@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Threading.Tasks;
 using VLegalizer.Web.Data.Entities;
 using VLegalizer.Web.Models;
@@ -8,6 +9,8 @@ namespace VLegalizer.Web.Helper
     public interface IUserHelper
     {
         Task<EmployeeEntity> GetUserByEmailAsync(string email);
+
+        Task<EmployeeEntity> GetUserAsync(Guid employeeId);
 
         Task<IdentityResult> AddUserAsync(EmployeeEntity user, string password);
 
@@ -23,7 +26,7 @@ namespace VLegalizer.Web.Helper
 
         Task<SignInResult> ValidatePasswordAsync(EmployeeEntity user, string password);
 
-        Task<string> GenerateEmailConfirmationTokenAsync(EmployeeEntity user);
+        Task<string> GenerateEmailConfirmationTokenAsync(EmployeeEntity employee);
 
         Task<IdentityResult> ConfirmEmailAsync(EmployeeEntity user, string token);
 

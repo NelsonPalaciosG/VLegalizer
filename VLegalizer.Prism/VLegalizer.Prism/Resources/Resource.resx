@@ -123,17 +123,35 @@
   <data name="Account" xml:space="preserve">
     <value>Admin my Account</value>
   </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="Address2" xml:space="preserve">
+    <value>Enter your address</value>
+  </data>
   <data name="Add_details" xml:space="preserve">
     <value>Add new details</value>
   </data>
   <data name="Add_trip" xml:space="preserve">
     <value>Add new trip</value>
   </data>
+  <data name="CellPhone" xml:space="preserve">
+    <value>Cell Phone</value>
+  </data>
+  <data name="Document" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="Document2" xml:space="preserve">
+    <value>Enter your document number</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
   <data name="Email2" xml:space="preserve">
     <value>example@domain.com</value>
+  </data>
+  <data name="Email_exist" xml:space="preserve">
+    <value>This email is already registered</value>
   </data>
   <data name="Enter_email" xml:space="preserve">
     <value>You must enter an email</value>
@@ -150,8 +168,26 @@
   <data name="Error3" xml:space="preserve">
     <value>This user have a big problem, call support</value>
   </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="FirstName2" xml:space="preserve">
+    <value>Enter your firstname</value>
+  </data>
+  <data name="FixedPhone" xml:space="preserve">
+    <value>Fixed Phone</value>
+  </data>
+  <data name="FixedPhone2" xml:space="preserve">
+    <value>Enter your phone number</value>
+  </data>
   <data name="ForgotPassword" xml:space="preserve">
     <value>Forgot Password</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="LastName2" xml:space="preserve">
+    <value>Enter your last name</value>
   </data>
   <data name="Loading" xml:space="preserve">
     <value>Loading</value>
@@ -168,8 +204,26 @@
   <data name="Password2" xml:space="preserve">
     <value>Enter your password</value>
   </data>
+  <data name="PasswordConfirm" xml:space="preserve">
+    <value>Password Confirm</value>
+  </data>
+  <data name="PasswordConfirm2" xml:space="preserve">
+    <value>Enter the password confirm</value>
+  </data>
+  <data name="PasswordLength" xml:space="preserve">
+    <value>The password must have at least 6 charactes length</value>
+  </data>
+  <data name="PasswordnoMatch" xml:space="preserve">
+    <value>The password and confirm does not match</value>
+  </data>
   <data name="Register" xml:space="preserve">
     <value>Register</value>
+  </data>
+  <data name="Register2" xml:space="preserve">
+    <value>Register new employee</value>
+  </data>
+  <data name="Registering" xml:space="preserve">
+    <value>Registering</value>
   </data>
   <data name="Trips" xml:space="preserve">
     <value>My Trips</value>

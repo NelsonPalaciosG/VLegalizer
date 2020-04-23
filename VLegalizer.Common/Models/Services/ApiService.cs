@@ -103,6 +103,39 @@ namespace VLegalizer.Common.Models.Services
                 };
             }
         }
+
+        public async Task<Response<object>> RegisterUserAsync(
+            string urlBase,
+            string servicePrefix,
+            string controller,
+            EmployeeRequest employeeRequest)
+        {
+            try
+            {
+                var request = JsonConvert.SerializeObject(employeeRequest);
+                var content = new StringContent(request, Encoding.UTF8, "application/json");
+                var client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+                var url = $"{urlBase}{servicePrefix}{controller}";
+                var response = await client.PostAsync(url, content);
+                var answer = await response.Content.ReadAsStringAsync();
+                var obj = JsonConvert.DeserializeObject<Response<object>>(answer);
+                return obj;
+            }
+            catch (Exception ex)
+            {
+                return new Response<object>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message,
+                };
+            }
+        }
+
+
     }
 
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Threading.Tasks;
 using VLegalizer.Web.Data.Entities;
 using VLegalizer.Web.Models;
@@ -104,5 +105,13 @@ namespace VLegalizer.Web.Helper
         {
             return await _employeeManager.ChangePasswordAsync(user, oldPassword, newPassword);
         }
+
+        public async Task<EmployeeEntity> GetUserAsync(Guid employeeId)
+        {
+            return await _employeeManager.FindByIdAsync(employeeId.ToString());
+        }
+
+
+
     }
 }

@@ -97,11 +97,65 @@ namespace VLegalizer.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Address.
+        /// </summary>
+        public static string Address {
+            get {
+                return ResourceManager.GetString("Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your address.
+        /// </summary>
+        public static string Address2 {
+            get {
+                return ResourceManager.GetString("Address2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cell Phone.
+        /// </summary>
+        public static string CellPhone {
+            get {
+                return ResourceManager.GetString("CellPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Document.
+        /// </summary>
+        public static string Document {
+            get {
+                return ResourceManager.GetString("Document", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your document number.
+        /// </summary>
+        public static string Document2 {
+            get {
+                return ResourceManager.GetString("Document2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         public static string Email {
             get {
                 return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This email is already registered.
+        /// </summary>
+        public static string Email_exist {
+            get {
+                return ResourceManager.GetString("Email_exist", resourceCulture);
             }
         }
         
@@ -160,11 +214,65 @@ namespace VLegalizer.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to First Name.
+        /// </summary>
+        public static string FirstName {
+            get {
+                return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your firstname.
+        /// </summary>
+        public static string FirstName2 {
+            get {
+                return ResourceManager.GetString("FirstName2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fixed Phone.
+        /// </summary>
+        public static string FixedPhone {
+            get {
+                return ResourceManager.GetString("FixedPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your phone number.
+        /// </summary>
+        public static string FixedPhone2 {
+            get {
+                return ResourceManager.GetString("FixedPhone2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Forgot Password.
         /// </summary>
         public static string ForgotPassword {
             get {
                 return ResourceManager.GetString("ForgotPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Name.
+        /// </summary>
+        public static string LastName {
+            get {
+                return ResourceManager.GetString("LastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your last name.
+        /// </summary>
+        public static string LastName2 {
+            get {
+                return ResourceManager.GetString("LastName2", resourceCulture);
             }
         }
         
@@ -214,11 +322,65 @@ namespace VLegalizer.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password Confirm.
+        /// </summary>
+        public static string PasswordConfirm {
+            get {
+                return ResourceManager.GetString("PasswordConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the password confirm.
+        /// </summary>
+        public static string PasswordConfirm2 {
+            get {
+                return ResourceManager.GetString("PasswordConfirm2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The password must have at least 6 charactes length.
+        /// </summary>
+        public static string PasswordLength {
+            get {
+                return ResourceManager.GetString("PasswordLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The password and confirm does not match.
+        /// </summary>
+        public static string PasswordnoMatch {
+            get {
+                return ResourceManager.GetString("PasswordnoMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Register.
         /// </summary>
         public static string Register {
             get {
                 return ResourceManager.GetString("Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register new employee.
+        /// </summary>
+        public static string Register2 {
+            get {
+                return ResourceManager.GetString("Register2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registering.
+        /// </summary>
+        public static string Registering {
+            get {
+                return ResourceManager.GetString("Registering", resourceCulture);
             }
         }
         

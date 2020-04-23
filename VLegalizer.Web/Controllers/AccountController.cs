@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using VLegalizer.Web.Data.Entities;
 using VLegalizer.Web.Helper;
 using VLegalizer.Web.Models;
 
@@ -108,51 +110,75 @@ namespace VLegalizer.Web.Controllers
 
             return BadRequest();
         }
-/* esto lo usaremos para la web
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(AddUserViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                string path = string.Empty;
-
-                if (model.PictureFile != null)
+        /* esto lo usaremos para la web
+                [HttpPost]
+                [ValidateAntiForgeryToken]
+                public async Task<IActionResult> Register(AddUserViewModel model)
                 {
-                    path = await _imageHelper.UploadImageAsync(model.PictureFile, "Users");
-                }
+                    if (ModelState.IsValid)
+                    {
+                        string path = string.Empty;
 
-                UserEntity user = await _userHelper.AddUserAsync(model, path, UserType.User);
-                if (user == null)
-                {
-                    ModelState.AddModelError(string.Empty, "This email is already used.");
+                        if (model.PictureFile != null)
+                        {
+                            path = await _imageHelper.UploadImageAsync(model.PictureFile, "Users");
+                        }
+
+                        UserEntity user = await _userHelper.AddUserAsync(model, path, UserType.User);
+                        if (user == null)
+                        {
+                            ModelState.AddModelError(string.Empty, "This email is already used.");
+                            model.Teams = _combosHelper.GetComboTeams();
+                            return View(model);
+                        }
+
+                        var myToken = await _userHelper.GenerateEmailConfirmationTokenAsync(user);
+                        var tokenLink = Url.Action("ConfirmEmail", "Account", new
+                        {
+                            userid = user.Id,
+                            token = myToken
+                        }, protocol: HttpContext.Request.Scheme);
+
+                        var response = _mailHelper.SendMail(model.Username, "Email confirmation", $"<h1>Email Confirmation</h1>" +
+                            $"To allow the user, " +
+                            $"plase click in this link:</br></br><a href = \"{tokenLink}\">Confirm Email</a>");
+                        if (response.IsSuccess)
+                        {
+                            ViewBag.Message = "The instructions to allow your user has been sent to email.";
+                            return View(model);
+                        }
+
+                        ModelState.AddModelError(string.Empty, response.Message);
+                    }
+
                     model.Teams = _combosHelper.GetComboTeams();
                     return View(model);
                 }
+        */
 
-                var myToken = await _userHelper.GenerateEmailConfirmationTokenAsync(user);
-                var tokenLink = Url.Action("ConfirmEmail", "Account", new
-                {
-                    userid = user.Id,
-                    token = myToken
-                }, protocol: HttpContext.Request.Scheme);
-
-                var response = _mailHelper.SendMail(model.Username, "Email confirmation", $"<h1>Email Confirmation</h1>" +
-                    $"To allow the user, " +
-                    $"plase click in this link:</br></br><a href = \"{tokenLink}\">Confirm Email</a>");
-                if (response.IsSuccess)
-                {
-                    ViewBag.Message = "The instructions to allow your user has been sent to email.";
-                    return View(model);
-                }
-
-                ModelState.AddModelError(string.Empty, response.Message);
+        public async Task<IActionResult> ConfirmEmail(string employeeId, string token)
+        {
+            if (string.IsNullOrEmpty(employeeId) || string.IsNullOrEmpty(token))
+            {
+                return NotFound();
             }
 
-            model.Teams = _combosHelper.GetComboTeams();
-            return View(model);
+            EmployeeEntity employee = await _userHelper.GetUserAsync(new Guid(employeeId));
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            IdentityResult result = await _userHelper.ConfirmEmailAsync(employee, token);
+            if (!result.Succeeded)
+            {
+                return NotFound();
+            }
+
+            return View();
         }
-*/
+
+
 
     }
 
