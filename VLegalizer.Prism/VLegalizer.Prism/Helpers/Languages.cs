@@ -93,6 +93,18 @@ namespace VLegalizer.Prism.Helpers
         public static string PasswordLength => Resource.PasswordLength;
 
         public static string PasswordnoMatch => Resource.PasswordnoMatch;
+
+        public static string PasswordRecover => Resource.PasswordRecover;
+
+        public static string Remembering => Resource.Remembering;
+
+        public static string ValidEmail => Resource.ValidEmail;
+
+        public static string Remember => Resource.Remember;
+
+        public static string Updating => Resource.Updating;
+
+        public static string Update => Resource.Update;
     }
 
 }

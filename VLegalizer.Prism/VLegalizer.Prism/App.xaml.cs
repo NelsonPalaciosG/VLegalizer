@@ -1,6 +1,10 @@
-﻿using Prism;
+﻿using Newtonsoft.Json;
+using Prism;
 using Prism.Ioc;
 using Syncfusion.Licensing;
+using System;
+using VLegalizer.Common.Helpers;
+using VLegalizer.Common.Models;
 using VLegalizer.Common.Models.Services;
 using VLegalizer.Prism.ViewModels;
 using VLegalizer.Prism.Views;
@@ -22,7 +26,15 @@ namespace VLegalizer.Prism
             SyncfusionLicenseProvider.RegisterLicense("MjQyMDQ2QDMxMzgyZTMxMmUzMEVPTThyc0NLc1grWEFTdXY4VjVsakJjelF4bHNKK3VIYlZaY0c1di9IMXM9");
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/LoginPage");
+            var token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
+            if (Settings.IsRemembered && token?.Expiration > DateTime.Now)
+            {
+                await NavigationService.NavigateAsync("/VLegalizerMasterDetailPage/NavigationPage/TripsPage");
+            }
+            else
+            {
+                await NavigationService.NavigateAsync("/NavigationPage/LoginPage");
+            }
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -36,6 +48,7 @@ namespace VLegalizer.Prism
             containerRegistry.RegisterForNavigation<AddTripPage, AddTripPageViewModel>();
             containerRegistry.RegisterForNavigation<TripDetailsPage, TripDetailsPageViewModel>();
             containerRegistry.RegisterForNavigation<RegisterPage, RegisterPageViewModel>();
+            containerRegistry.RegisterForNavigation<RememberPasswordPage, RememberPasswordPageViewModel>();
         }
     }
 }

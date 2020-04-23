@@ -10,6 +10,7 @@ namespace VLegalizer.Common.Helpers
         private const string _employee = "employee";
         private const string _isLogin= "isLogin";
         private const string _trips = "trips";
+        private const string _isRemembered = "IsRemembered";
         private static readonly string _stringDefault = string.Empty;
         private static readonly bool _boolDefault = false;
     
@@ -36,7 +37,13 @@ namespace VLegalizer.Common.Helpers
             get => AppSettings.GetValueOrDefault(_trips, _stringDefault);
             set => AppSettings.AddOrUpdateValue(_trips, value);
         }
-         
+
+        public static bool IsRemembered
+        {
+            get => AppSettings.GetValueOrDefault(_isRemembered, _boolDefault);
+            set => AppSettings.AddOrUpdateValue(_isRemembered, value);
+        }
+
     }
 
 }

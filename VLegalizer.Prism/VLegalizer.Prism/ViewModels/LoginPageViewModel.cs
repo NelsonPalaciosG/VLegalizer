@@ -21,6 +21,7 @@ namespace VLegalizer.Prism.ViewModels
         private string _password;
         private DelegateCommand _loginCommand;
         private DelegateCommand _registerCommand;
+        private DelegateCommand _forgotPasswordCommand;
 
         public LoginPageViewModel(
             INavigationService navigationService,
@@ -30,11 +31,17 @@ namespace VLegalizer.Prism.ViewModels
             _apiService = apiService;
             Title = Languages.Login;
             IsEnabled = true;
+            IsRemember = true;
         }
 
         public DelegateCommand LoginCommand => _loginCommand ?? (_loginCommand = new DelegateCommand(Login));
 
         public DelegateCommand RegisterCommand => _registerCommand ?? (_registerCommand = new DelegateCommand(RegisterAsync));
+
+        public DelegateCommand ForgotPasswordCommand => _forgotPasswordCommand ?? (_forgotPasswordCommand = new DelegateCommand(ForgotPassword));
+       
+       
+        private bool _isRemember;
 
         public bool IsRunning
         {
@@ -54,6 +61,12 @@ namespace VLegalizer.Prism.ViewModels
         {
             get => _password;
             set => SetProperty(ref _password, value);
+        }
+
+        public bool IsRemember
+        {
+            get => _isRemember;
+            set => SetProperty(ref _isRemember, value);
         }
 
         private async void Login()
@@ -106,6 +119,7 @@ namespace VLegalizer.Prism.ViewModels
             var trips = (EmployeeResponse)response2.Result;
             Settings.Employee = JsonConvert.SerializeObject(trips);
             Settings.Token = JsonConvert.SerializeObject(token);
+            Settings.IsRemembered = IsRemember;
             Settings.IsLogin = true;
 
 
@@ -122,5 +136,11 @@ namespace VLegalizer.Prism.ViewModels
             await _navigationService.NavigateAsync("RegisterPage");
 
         }
+
+        private async void ForgotPassword()
+        {
+            await _navigationService.NavigateAsync("RememberPasswordPage");
+        }
+
     }
 }

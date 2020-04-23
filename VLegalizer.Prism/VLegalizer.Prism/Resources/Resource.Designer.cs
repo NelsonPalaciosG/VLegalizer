@@ -358,6 +358,15 @@ namespace VLegalizer.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password Recover.
+        /// </summary>
+        public static string PasswordRecover {
+            get {
+                return ResourceManager.GetString("PasswordRecover", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Register.
         /// </summary>
         public static string Register {
@@ -385,6 +394,24 @@ namespace VLegalizer.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rememberme in this device.
+        /// </summary>
+        public static string Remember {
+            get {
+                return ResourceManager.GetString("Remember", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remembering.
+        /// </summary>
+        public static string Remembering {
+            get {
+                return ResourceManager.GetString("Remembering", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Trip details.
         /// </summary>
         public static string Trip_details {
@@ -399,6 +426,33 @@ namespace VLegalizer.Prism.Resources {
         public static string Trips {
             get {
                 return ResourceManager.GetString("Trips", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update.
+        /// </summary>
+        public static string Update {
+            get {
+                return ResourceManager.GetString("Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updating.
+        /// </summary>
+        public static string Updating {
+            get {
+                return ResourceManager.GetString("Updating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must enter a valid email.
+        /// </summary>
+        public static string ValidEmail {
+            get {
+                return ResourceManager.GetString("ValidEmail", resourceCulture);
             }
         }
     }

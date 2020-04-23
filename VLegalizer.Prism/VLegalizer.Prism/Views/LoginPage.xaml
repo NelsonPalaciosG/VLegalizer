@@ -13,7 +13,7 @@
         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
                      AbsoluteLayout.LayoutFlags="All" 
                      Padding="10">
-            <Image HeightRequest="325"
+            <Image HeightRequest="250"
                    Margin="0,20,0,5"
                    Source="VLegalizer_logo"/>
             <StackLayout  VerticalOptions="CenterAndExpand">
@@ -43,6 +43,16 @@
                            Placeholder="{i18n:Translate Password2}"
                            Text="{Binding Password}"/>
                 </Grid>
+                <StackLayout
+                       HorizontalOptions="Center"
+                       Orientation="Horizontal">
+                <Label
+                       Text="{i18n:Translate Remember}"
+                       VerticalOptions="Center"/>
+                <CheckBox
+                       IsChecked="{Binding IsRemember}"/>
+                </StackLayout>
+
                 <Label FontAttributes="Bold"
                        HorizontalOptions="Center" 
                        Text="{i18n:Translate ForgotPassword}">
@@ -61,10 +71,12 @@
                         Style="{StaticResource SecondaryButton}"/>
             </StackLayout>
         </StackLayout>
-        <busyindicator:SfBusyIndicator AnimationType="HorizontalPulsingBox" 
-                                       AbsoluteLayout.LayoutBounds=".5,.58,.5,.42"
+        <busyindicator:SfBusyIndicator AnimationType="Globe" 
+                                       AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
                 	                   AbsoluteLayout.LayoutFlags="All"
                 	                   HorizontalOptions="Center"
+                                       BackgroundColor="{StaticResource ColorSecondary}"
+                                       TextColor="{StaticResource ColorFontInverse}"
                 	                   IsVisible="{Binding IsRunning}"
                 	                   VerticalOptions="Center"
                 	                   ViewBoxWidth="80"

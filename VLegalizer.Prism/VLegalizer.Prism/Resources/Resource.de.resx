@@ -231,4 +231,22 @@
   <data name="PasswordnoMatch" xml:space="preserve">
     <value>Kennwort und Bestätigungkennworts stimmen nicht überein</value>
   </data>
+  <data name="PasswordRecover" xml:space="preserve">
+    <value>Passwort wiederherstellen</value>
+  </data>
+  <data name="Remembering" xml:space="preserve">
+    <value>Erinnerungsvermögen</value>
+  </data>
+  <data name="ValidEmail" xml:space="preserve">
+    <value>Verwenden Sie bitte eine gültige E-Mail Adresse</value>
+  </data>
+  <data name="Remember" xml:space="preserve">
+    <value>Rememberme in diesem Gerät</value>
+  </data>
+  <data name="Updating" xml:space="preserve">
+    <value>Wird aktualisiert</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Aktualisieren</value>
+  </data>
 </root>

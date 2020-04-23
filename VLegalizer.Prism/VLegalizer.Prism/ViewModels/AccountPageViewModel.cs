@@ -17,6 +17,7 @@ namespace VLegalizer.Prism.ViewModels
         {
             _navigationService = navigationService;
             Title = Languages.Account;
+            
         }
     }
 }

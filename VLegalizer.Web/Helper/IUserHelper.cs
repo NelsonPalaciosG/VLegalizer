@@ -36,5 +36,6 @@ namespace VLegalizer.Web.Helper
 
         Task<IdentityResult> ChangePasswordAsync(EmployeeEntity user, string oldPassword, string newPassword);
 
+        Task<IdentityResult> ResetPasswordAsync(EmployeeEntity user, string token, string password);
     }
 }

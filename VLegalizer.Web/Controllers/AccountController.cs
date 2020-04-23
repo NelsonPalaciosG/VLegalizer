@@ -42,6 +42,22 @@ namespace VLegalizer.Web.Controllers
             return View();
         }
 
+
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        public IActionResult RecoverPassword()
+        {
+            return View();
+        }
+
+        public IActionResult ResetPassword(string token)
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
@@ -133,7 +149,83 @@ namespace VLegalizer.Web.Controllers
             return View();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var employee = await _userHelper.GetUserByEmailAsync(User.Identity.Name);
+                if (employee != null)
+                {
+                    var result = await _userHelper.ChangePasswordAsync(employee, model.OldPassword, model.NewPassword);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("ChangeUser");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, result.Errors.FirstOrDefault().Description);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Employee no found.");
+                }
+            }
 
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> RecoverPassword(RecoverPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                EmployeeEntity employee = await _userHelper.GetUserByEmailAsync(model.Email);
+                if (employee == null)
+                {
+                    ModelState.AddModelError(string.Empty, "The email doesn't correspont to a registered user.");
+                    return View(model);
+                }
+
+                string myToken = await _userHelper.GeneratePasswordResetTokenAsync(employee);
+                string link = Url.Action(
+                    "ResetPassword",
+                    "Account",
+                    new { token = myToken }, protocol: HttpContext.Request.Scheme);
+                _mailHelper.SendMail(model.Email, "Trip report Password Reset", $"<h1>Trip report Password Reset</h1>" +
+                    $"To reset the password click in this link:</br></br>" +
+                    $"<a href = \"{link}\">Reset Password</a>");
+                ViewBag.Message = "The instructions to recover your password has been sent to email.";
+                return View();
+
+            }
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            EmployeeEntity employee = await _userHelper.GetUserByEmailAsync(model.EmployeeName);
+            if (employee != null)
+            {
+                IdentityResult result = await _userHelper.ResetPasswordAsync(employee, model.Token, model.Password);
+                if (result.Succeeded)
+                {
+                    ViewBag.Message = "Password reset successful.";
+                    return View();
+                }
+
+                ViewBag.Message = "Error while resetting the password.";
+                return View(model);
+            }
+
+            ViewBag.Message = "Employee not found.";
+            return View(model);
+        }
 
     }
 

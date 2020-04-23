@@ -216,6 +216,9 @@
   <data name="PasswordnoMatch" xml:space="preserve">
     <value>The password and confirm does not match</value>
   </data>
+  <data name="PasswordRecover" xml:space="preserve">
+    <value>Password Recover</value>
+  </data>
   <data name="Register" xml:space="preserve">
     <value>Register</value>
   </data>
@@ -225,10 +228,25 @@
   <data name="Registering" xml:space="preserve">
     <value>Registering</value>
   </data>
+  <data name="Remember" xml:space="preserve">
+    <value>Rememberme in this device</value>
+  </data>
+  <data name="Remembering" xml:space="preserve">
+    <value>Remembering</value>
+  </data>
   <data name="Trips" xml:space="preserve">
     <value>My Trips</value>
   </data>
   <data name="Trip_details" xml:space="preserve">
     <value>Trip details</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="Updating" xml:space="preserve">
+    <value>Updating</value>
+  </data>
+  <data name="ValidEmail" xml:space="preserve">
+    <value>You must enter a valid email</value>
   </data>
 </root>

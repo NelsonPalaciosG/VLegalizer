@@ -231,4 +231,22 @@
   <data name="PasswordnoMatch" xml:space="preserve">
     <value>La contraseña y la confirmación de contraseña no coinciden</value>
   </data>
+  <data name="PasswordRecover" xml:space="preserve">
+    <value>Recuperar contraseña</value>
+  </data>
+  <data name="Remembering" xml:space="preserve">
+    <value>Recordando</value>
+  </data>
+  <data name="ValidEmail" xml:space="preserve">
+    <value>Debes introducir una dirección de correo válida</value>
+  </data>
+  <data name="Remember" xml:space="preserve">
+    <value>Recordarme en este dispositivo</value>
+  </data>
+  <data name="Updating" xml:space="preserve">
+    <value>Actualizando</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Actualizar</value>
+  </data>
 </root>
