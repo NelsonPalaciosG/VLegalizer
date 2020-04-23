@@ -41,7 +41,7 @@
             </Style>
 
             <!-- Parameters -->
-            <x:String x:Key="UrlAPI">https://vlegalizerwebpalaciosg.azurewebsites.net/</x:String>
+            <x:String x:Key="UrlAPI">https://vlegalizerwebpalaciosgal.azurewebsites.net/</x:String>
 
         </ResourceDictionary>
 

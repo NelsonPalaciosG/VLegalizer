@@ -33,8 +33,6 @@ namespace VLegalizer.Common.Models
         [StringLength(20, MinimumLength = 6)]
         public string Password { get; set; }
 
-        [Required]
-        public string CultureInfo { get; set; }
 
         [Required]
         public int RoleId { get; set; }

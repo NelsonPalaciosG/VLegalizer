@@ -83,7 +83,7 @@ namespace VLegalizer.Prism.ViewModels
             var url = App.Current.Resources["UrlAPI"].ToString();
             var response = await _apiService.RegisterUserAsync(
                 url,
-                "/api",
+                "api",
                 "/Account",
                 request);
 

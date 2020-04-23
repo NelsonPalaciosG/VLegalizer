@@ -16,6 +16,7 @@ using VLegalizer.Web.Helper;
 namespace VLegalizer.Web.Controllers.API
 {
     [Route("api/[Controller]")]
+    [ApiController]
     public class AccountController : ControllerBase
     {
         private readonly DataContext _dataContext;
@@ -47,11 +48,6 @@ namespace VLegalizer.Web.Controllers.API
                     Message = "Bad request"
                 });
             }
-
-
-            CultureInfo cultureInfo = new CultureInfo(request.CultureInfo);
-            Resource.Culture = cultureInfo;
-
 
             EmployeeEntity employee = await _userHelper.GetUserByEmailAsync(request.Email);
             if (employee != null)
