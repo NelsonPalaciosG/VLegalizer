@@ -61,7 +61,7 @@
                 <Button
                 	Command="{Binding SaveCommand}"
                 	IsEnabled="{Binding IsEnabled}"
-                	Text="{i18n:Translate Register}"
+                	Text="{i18n:Translate Add_trip}"
                 	VerticalOptions="EndAndExpand"/>
             </StackLayout>
             <busyindicator:SfBusyIndicator AnimationType="Globe" 
@@ -70,7 +70,7 @@
                 	                   HorizontalOptions="Center"
                                        BackgroundColor="{StaticResource ColorSecondary}"
                                        TextColor="{StaticResource ColorFontInverse}"
-                                       Title="{i18n:Translate Registering}"
+                                       Title="{i18n:Translate Add_trip}"
                 	                   IsVisible="{Binding IsRunning}"
                 	                   VerticalOptions="Center"
                 	                   ViewBoxWidth="80"

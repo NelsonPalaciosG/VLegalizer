@@ -77,6 +77,7 @@
                 	                   HorizontalOptions="Center"
                                        BackgroundColor="{StaticResource ColorSecondary}"
                                        TextColor="{StaticResource ColorFontInverse}"
+                                       Title="{i18n:Translate Loading}"
                 	                   IsVisible="{Binding IsRunning}"
                 	                   VerticalOptions="Center"
                 	                   ViewBoxWidth="80"

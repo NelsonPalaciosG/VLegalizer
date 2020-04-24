@@ -101,7 +101,7 @@ namespace VLegalizer.Web.Controllers.API
             }
 
 
-            EmployeeEntity employeeEntity = await _userHelper.GetUserAsync(request.Email);
+            EmployeeEntity employeeEntity = await _userHelper.GetUserAsync(request.EmployeeId);
             if (employeeEntity == null)
             {
                 return BadRequest(Resource.UserdontExist);
