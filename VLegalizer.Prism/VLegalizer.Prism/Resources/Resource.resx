@@ -144,6 +144,24 @@
   <data name="City" xml:space="preserve">
     <value>City</value>
   </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Confirm New Password</value>
+  </data>
+  <data name="ConfirmNewPasswordError" xml:space="preserve">
+    <value>You must enter your new password</value>
+  </data>
+  <data name="ConfirmNewPasswordPlaceHolder" xml:space="preserve">
+    <value>Confirm you new password</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Current Password</value>
+  </data>
+  <data name="CurrentPasswordError" xml:space="preserve">
+    <value>You must enter your current password</value>
+  </data>
+  <data name="CurrentPasswordPlaceHolder" xml:space="preserve">
+    <value>Enter current password</value>
+  </data>
   <data name="Document" xml:space="preserve">
     <value>Document</value>
   </data>
@@ -206,6 +224,15 @@
   </data>
   <data name="Logout" xml:space="preserve">
     <value>Logout</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="NewPasswordError" xml:space="preserve">
+    <value>You must enter a new password</value>
+  </data>
+  <data name="NewPasswordPlaceHolder" xml:space="preserve">
+    <value>Enter a new password</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>

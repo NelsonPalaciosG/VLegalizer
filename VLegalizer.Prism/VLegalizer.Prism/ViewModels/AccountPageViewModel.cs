@@ -21,6 +21,7 @@ namespace VLegalizer.Prism.ViewModels
         private List<TripItemViewModel> _trips;
         private bool _isRunning;
         private bool _isEnabled;
+        private DelegateCommand _changePasswordCommand;
         private DelegateCommand _saveCommand;
 
 
@@ -37,6 +38,8 @@ namespace VLegalizer.Prism.ViewModels
         }
        
         public DelegateCommand SaveCommand => _saveCommand ?? (_saveCommand = new DelegateCommand(SaveAsync));
+
+        public DelegateCommand ChangePasswordCommand => _changePasswordCommand ?? (_changePasswordCommand = new DelegateCommand(ChangePassword));
 
         public List<TripItemViewModel> Trips
         {
@@ -61,6 +64,12 @@ namespace VLegalizer.Prism.ViewModels
             get => _isEnabled;
             set => SetProperty(ref _isEnabled, value);
         }
+
+        private async void ChangePassword()
+        {
+            await _navigationService.NavigateAsync("ChangePasswordPage");
+        }
+
 
         private async void SaveAsync()
         {

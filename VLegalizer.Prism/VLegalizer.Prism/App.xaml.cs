@@ -49,6 +49,8 @@ namespace VLegalizer.Prism
             containerRegistry.RegisterForNavigation<TripDetailsPage, TripDetailsPageViewModel>();
             containerRegistry.RegisterForNavigation<RegisterPage, RegisterPageViewModel>();
             containerRegistry.RegisterForNavigation<RememberPasswordPage, RememberPasswordPageViewModel>();
+
+            containerRegistry.RegisterForNavigation<ChangePasswordPage, ChangePasswordPageViewModel>();
         }
     }
 }

@@ -270,4 +270,31 @@
   <data name="City" xml:space="preserve">
     <value>Ort</value>
   </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Neues Kennwort bestätigen</value>
+  </data>
+  <data name="ConfirmNewPasswordError" xml:space="preserve">
+    <value>Sie müssen Ihr neues Passwort eingeben</value>
+  </data>
+  <data name="ConfirmNewPasswordPlaceHolder" xml:space="preserve">
+    <value>Bestätige dein neues Passwort</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Aktuelles Kennwort</value>
+  </data>
+  <data name="CurrentPasswordError" xml:space="preserve">
+    <value>Sie müssen Ihr aktuelles Passwort eingeben</value>
+  </data>
+  <data name="CurrentPasswordPlaceHolder" xml:space="preserve">
+    <value>Aktuelles Kennwort eingeben</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Neues Kennwort</value>
+  </data>
+  <data name="NewPasswordError" xml:space="preserve">
+    <value>Sie müssen ein neues Kennwort eingeben</value>
+  </data>
+  <data name="NewPasswordPlaceHolder" xml:space="preserve">
+    <value>Geben Sie ein neues Kennwort ein</value>
+  </data>
 </root>

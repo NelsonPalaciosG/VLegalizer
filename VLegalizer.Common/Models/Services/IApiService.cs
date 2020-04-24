@@ -50,6 +50,15 @@ namespace VLegalizer.Common.Models.Services
             string tokenType,
             string accessToken);
 
+        Task<Response> ChangePasswordAsync(
+            string urlBase,
+            string servicePrefix,
+            string controller,
+            ChangePasswordRequest changePasswordRequest,
+            string tokenType,
+            string accessToken);
+
+
     }
 
 }
