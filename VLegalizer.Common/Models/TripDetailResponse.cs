@@ -16,7 +16,9 @@ namespace VLegalizer.Common.Models
 
         public string PicturePath { get; set; }
 
-        public ExpenseTypeResponse ExpenseType { get; set; }
+        public int IdExpenseType { get; set; }
+        
+        public string ExpenseName { get; set; }
 
         //TODO: replace the correct URL for the image
         public string ImageFullPath => string.IsNullOrEmpty(PicturePath)

@@ -104,7 +104,7 @@ namespace VLegalizer.Prism.ViewModels
                 StartDate = StartDate,
                 EndDate = EndDate,
                 City = City,
-                EmployeeId = new Guid(Trip.Employee.Id)
+                EmployeeId = new Guid(Trip.Employee.EmployeeId)
             };
 
 

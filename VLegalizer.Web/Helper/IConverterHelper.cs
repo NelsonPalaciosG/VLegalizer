@@ -12,8 +12,8 @@ namespace VLegalizer.Web.Helper
 
         EmployeeResponse ToEmployeeResponse(EmployeeEntity employee);
 
-        TripDetailResponse ToTripDetailResponse(TripDetailEntity tripEntity);
+        List<TripDetailResponse> ToTripDetailResponse(List<TripDetailEntity> tripEntity);
 
-
+       // ExpenseTypeRequest ToExpenseTypeAsync(ExpenseTypeEntity expenseTypeEntity);
     }
 }
