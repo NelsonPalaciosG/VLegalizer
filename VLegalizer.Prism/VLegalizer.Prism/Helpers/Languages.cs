@@ -112,6 +112,13 @@ namespace VLegalizer.Prism.Helpers
 
         public static string UserdontExist => Resource.UserdontExist;
 
+        public static string TripAdded => Resource.TripAdded;
+
+        public static string StartDate => Resource.StartDate;
+
+        public static string EndDate => Resource.EndDate;
+
+        public static string City => Resource.City;
     }
 
 }

@@ -141,6 +141,9 @@
   <data name="ChangePassword" xml:space="preserve">
     <value>Change password</value>
   </data>
+  <data name="City" xml:space="preserve">
+    <value>City</value>
+  </data>
   <data name="Document" xml:space="preserve">
     <value>Document</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="Email_exist" xml:space="preserve">
     <value>This email is already registered</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>End Date</value>
   </data>
   <data name="Enter_email" xml:space="preserve">
     <value>You must enter an email</value>
@@ -236,6 +242,12 @@
   </data>
   <data name="Remembering" xml:space="preserve">
     <value>Remembering</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="TripAdded" xml:space="preserve">
+    <value>Your trip was successfully added</value>
   </data>
   <data name="Trips" xml:space="preserve">
     <value>My Trips</value>

@@ -133,6 +133,15 @@ namespace VLegalizer.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to City.
+        /// </summary>
+        public static string City {
+            get {
+                return ResourceManager.GetString("City", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Document.
         /// </summary>
         public static string Document {
@@ -174,6 +183,15 @@ namespace VLegalizer.Prism.Resources {
         public static string Email2 {
             get {
                 return ResourceManager.GetString("Email2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End Date.
+        /// </summary>
+        public static string EndDate {
+            get {
+                return ResourceManager.GetString("EndDate", resourceCulture);
             }
         }
         
@@ -421,11 +439,29 @@ namespace VLegalizer.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start Date.
+        /// </summary>
+        public static string StartDate {
+            get {
+                return ResourceManager.GetString("StartDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Trip details.
         /// </summary>
         public static string Trip_details {
             get {
                 return ResourceManager.GetString("Trip_details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your trip was successfully added.
+        /// </summary>
+        public static string TripAdded {
+            get {
+                return ResourceManager.GetString("TripAdded", resourceCulture);
             }
         }
         

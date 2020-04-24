@@ -258,4 +258,16 @@
   <data name="UserdontExist" xml:space="preserve">
     <value>Benutzer ist nicht vorhanden</value>
   </data>
+  <data name="TripAdded" xml:space="preserve">
+    <value>Ihr Fahrzeug wurde erfolgreich hinzugefügt</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>Enddatum</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Anfangsdatum</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>Ort</value>
+  </data>
 </root>

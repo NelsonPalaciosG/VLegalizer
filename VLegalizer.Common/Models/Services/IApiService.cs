@@ -5,7 +5,7 @@ namespace VLegalizer.Common.Models.Services
     public interface IApiService
     {
 
-        Task<Response<EmployeeResponse>> GetTripByEmailAsync(
+        Task<Response> GetTripByEmailAsync(
             string urlBase,
             string servicePrefix,
             string controller,
@@ -14,34 +14,41 @@ namespace VLegalizer.Common.Models.Services
             string email);
 
 
-        Task<Response<TokenResponse>> GetTokenAsync(
+        Task<Response> GetTokenAsync(
             string urlBase,
             string servicePrefix,
             string controller,
             TokenRequest request);
 
 
-        Task<Response<object>> RegisterUserAsync(
+        Task<Response> RegisterUserAsync(
             string urlBase,
             string servicePrefix,
             string controller,
             EmployeeRequest employeeRequest);
 
 
-        Task<Response<object>> RecoverPasswordAsync(
+        Task<Response> RecoverPasswordAsync(
             string urlBase,
             string servicePrefix,
             string controller,
             EmailRequest emailRequest);
 
-        Task<Response<object>> PutAsync<T>(
-        string urlBase,
-        string servicePrefix,
-        string controller,
-        T model,
-        string tokenType,
-        string accessToken);
+        Task<Response> PutAsync<T>(
+            string urlBase,
+            string servicePrefix,
+            string controller,
+            T model,
+            string tokenType,
+            string accessToken);
 
+        Task<Response> RegisterTripAsync<T>(
+            string urlBase,
+            string servicePrefix,
+            string controller,
+            T model, 
+            string tokenType,
+            string accessToken);
 
     }
 

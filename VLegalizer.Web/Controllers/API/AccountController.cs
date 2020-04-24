@@ -42,7 +42,7 @@ namespace VLegalizer.Web.Controllers.API
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(new Response<EmployeeResponse>
+                return BadRequest(new Response
                 {
                     IsSuccess = false,
                     Message = "Bad request"
@@ -52,7 +52,7 @@ namespace VLegalizer.Web.Controllers.API
             EmployeeEntity employee = await _userHelper.GetUserByEmailAsync(request.Email);
             if (employee != null)
             {
-                return BadRequest(new Response<EmployeeResponse>
+                return BadRequest(new Response
                 {
                     IsSuccess = false,
                     Message = Resource.Email_exist
@@ -119,7 +119,7 @@ namespace VLegalizer.Web.Controllers.API
 
 
 
-            return Ok(new Response<object>
+            return Ok(new Response
             {
                 IsSuccess = true,
                 Message = "A Confirmation email was sent. Please confirm your account and log into the App."
@@ -133,7 +133,7 @@ namespace VLegalizer.Web.Controllers.API
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(new Response<object>
+                return BadRequest(new Response
                 {
                     IsSuccess = false,
                     Message = "Bad request"
@@ -145,7 +145,7 @@ namespace VLegalizer.Web.Controllers.API
             EmployeeEntity employee = await _userHelper.GetUserByEmailAsync(request.Email);
             if (employee == null)
             {
-                return BadRequest(new Response<object>
+                return BadRequest(new Response
                 {
                     IsSuccess = false,
                     Message = "This email is not assigned to any user."
@@ -162,7 +162,7 @@ namespace VLegalizer.Web.Controllers.API
 
 
 
-            return Ok(new Response<object>
+            return Ok(new Response
             {
                 IsSuccess = true,
                 Message = "An email with instructions to change the password was sent."
@@ -220,7 +220,7 @@ namespace VLegalizer.Web.Controllers.API
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(new Response<object>
+                return BadRequest(new Response
                 {
                     IsSuccess = false,
                     Message = "Bad request"
@@ -232,7 +232,7 @@ namespace VLegalizer.Web.Controllers.API
             var employee = await _userHelper.GetUserByEmailAsync(request.Email);
             if (employee == null)
             {
-                return BadRequest(new Response<object>
+                return BadRequest(new Response
                 {
                     IsSuccess = false,
                     Message = "This email is not assigned to any user."
@@ -244,7 +244,7 @@ namespace VLegalizer.Web.Controllers.API
             var result = await _userHelper.ChangePasswordAsync(employee, request.OldPassword, request.NewPassword);
             if (!result.Succeeded)
             {
-                return BadRequest(new Response<object>
+                return BadRequest(new Response
                 {
                     IsSuccess = false,
                     Message = result.Errors.FirstOrDefault().Description
@@ -253,7 +253,7 @@ namespace VLegalizer.Web.Controllers.API
 
 
 
-            return Ok(new Response<object>
+            return Ok(new Response
             {
                 IsSuccess = true,
                 Message = "The password was changed successfully!"

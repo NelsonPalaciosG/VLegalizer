@@ -80,128 +80,19 @@ namespace VLegalizer.Web.Controllers.API
             }
         }
 
-       /* [HttpPost]
-        [Route("GetMyTrips")]
-        public async Task<IActionResult> GetMyTripsAsync([FromBody] MyTripsRequest request)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var tripEntity = await _context.Trips
-                .Include(t => t.Employee)
-                .Include(t => t.TripDetails)
-                .ThenInclude(t => t.TripDetails)
-                .Where(t => t.Employee.Email == request.Email &&
-                            t.StartDate >= request.StartDate)
-                .OrderByDescending(t => t.StartDate)
-                .ToListAsync();
-
-            return Ok(_converterHelper.ToTripResponse(tripEntity));
-        }*/
-
-        // GET: api/Trips/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetTripEntity([FromRoute] int id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            TripEntity tripEntity = await _context.Trips.FindAsync(id);
-
-            if (tripEntity == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(tripEntity);
-        }
-
-        // PUT: api/Trips/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutTripEntity([FromRoute] int id, [FromBody] TripEntity tripEntity)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != tripEntity.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(tripEntity).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TripEntityExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Trips
-        [HttpPost]
-        public async Task<IActionResult> PostTripEntity([FromBody] TripEntity tripEntity)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            _context.Trips.Add(tripEntity);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetTripEntity", new { id = tripEntity.Id }, tripEntity);
-        }
-
-        // DELETE: api/Trips/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTripEntity([FromRoute] int id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            TripEntity tripEntity = await _context.Trips.FindAsync(id);
-            if (tripEntity == null)
-            {
-                return NotFound();
-            }
-
-            _context.Trips.Remove(tripEntity);
-            await _context.SaveChangesAsync();
-
-            return Ok(tripEntity);
-        }
-
         private bool TripEntityExists(int id)
         {
             return _context.Trips.Any(e => e.Id == id);
         }
 
+
         [HttpPost]
+        [Route("PostTrips")]
         public async Task<IActionResult> PostTrips([FromBody] TripRequest request)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(new Response<object>
+                return BadRequest(new Response
                 {
                     IsSuccess = false,
                     Message = "Bad request",
@@ -210,7 +101,7 @@ namespace VLegalizer.Web.Controllers.API
             }
 
 
-            EmployeeEntity employeeEntity = await _userHelper.GetUserAsync(request.EmployeeId);
+            EmployeeEntity employeeEntity = await _userHelper.GetUserAsync(request.Email);
             if (employeeEntity == null)
             {
                 return BadRequest(Resource.UserdontExist);
@@ -221,6 +112,7 @@ namespace VLegalizer.Web.Controllers.API
 
             TripEntity tripEntity = new TripEntity
             {
+                
                 StartDate = request.StartDate,
                 EndDate = request.EndDate,
                 City = request.City,
@@ -233,8 +125,6 @@ namespace VLegalizer.Web.Controllers.API
             try
             {
                 await _context.SaveChangesAsync();
-
-
 
             }
 

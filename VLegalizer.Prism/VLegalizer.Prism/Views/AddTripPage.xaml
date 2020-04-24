@@ -2,9 +2,81 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:i18n="clr-namespace:VLegalizer.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="VLegalizer.Prism.Views.AddTripPage"
              BackgroundColor="{StaticResource ColorBackgroud}"
              Title="{Binding Title}">
-  
+    
+    
+    <ScrollView>
+        <AbsoluteLayout>
+            <StackLayout
+            	AbsoluteLayout.LayoutBounds="0,0,1,1"
+            	AbsoluteLayout.LayoutFlags="All"
+            	Padding="10">
+                <StackLayout  VerticalOptions="StartAndExpand">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label
+                    	Grid.Row="0"
+                    	Grid.Column="0"
+                    	Text="{i18n:Translate StartDate}"
+                    	VerticalOptions="Center"/>
+                        <Entry
+                    	Grid.Row="0"
+                    	Grid.Column="1"
+                    	Placeholder="{i18n:Translate StartDate}"
+                    	Text="{Binding StarDate}"/>
+
+                        <Label
+                    	Grid.Row="1"
+                    	Grid.Column="0"
+                    	Text="{i18n:Translate EndDate}"
+                    	VerticalOptions="Center"/>
+                        <Entry
+                    	Grid.Row="1"
+                    	Grid.Column="1"
+                    	Placeholder="{i18n:Translate EndDate}"
+                    	Text="{Binding EndDate}"/>
+
+                        <Label
+                    	Grid.Row="2"
+                    	Grid.Column="0"
+                    	Text="{i18n:Translate City}"
+                    	VerticalOptions="Center"/>
+                        <Entry
+                    	Grid.Row="2"
+                    	Grid.Column="1"
+                    	Placeholder="{i18n:Translate City}"
+                    	Text="{Binding City}"/>
+
+                    </Grid>
+                </StackLayout>
+                <Button
+                	Command="{Binding SaveCommand}"
+                	IsEnabled="{Binding IsEnabled}"
+                	Text="{i18n:Translate Register}"
+                	VerticalOptions="EndAndExpand"/>
+            </StackLayout>
+            <busyindicator:SfBusyIndicator AnimationType="Globe" 
+                                       AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                	                   AbsoluteLayout.LayoutFlags="All"
+                	                   HorizontalOptions="Center"
+                                       BackgroundColor="{StaticResource ColorSecondary}"
+                                       TextColor="{StaticResource ColorFontInverse}"
+                                       Title="{i18n:Translate Registering}"
+                	                   IsVisible="{Binding IsRunning}"
+                	                   VerticalOptions="Center"
+                	                   ViewBoxWidth="80"
+                	                   ViewBoxHeight="80" />
+        </AbsoluteLayout>
+    </ScrollView>
+
+
 </ContentPage>

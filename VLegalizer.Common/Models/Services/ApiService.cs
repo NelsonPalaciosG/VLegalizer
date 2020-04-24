@@ -4,12 +4,13 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using VLegalizer.Common.Helpers;
 
 namespace VLegalizer.Common.Models.Services
 {
     public class ApiService : IApiService
     {
-        public async Task<Response<TokenResponse>> GetTokenAsync(
+        public async Task<Response> GetTokenAsync(
             string urlBase,
             string servicePrefix,
             string controller,
@@ -30,7 +31,7 @@ namespace VLegalizer.Common.Models.Services
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    return new Response<TokenResponse>
+                    return new Response
                     {
                         IsSuccess = false,
                         Message = result,
@@ -38,7 +39,7 @@ namespace VLegalizer.Common.Models.Services
                 }
 
                 TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(result);
-                return new Response<TokenResponse>
+                return new Response
                 {
                     IsSuccess = true,
                     Result = token
@@ -46,7 +47,7 @@ namespace VLegalizer.Common.Models.Services
             }
             catch (Exception ex)
             {
-                return new Response<TokenResponse>
+                return new Response
                 {
                     IsSuccess = false,
                     Message = ex.Message
@@ -54,7 +55,7 @@ namespace VLegalizer.Common.Models.Services
             }
         }
 
-        public async Task<Response<EmployeeResponse>> GetTripByEmailAsync(
+        public async Task<Response> GetTripByEmailAsync(
             string urlBase,
             string servicePrefix,
             string controller,
@@ -79,7 +80,7 @@ namespace VLegalizer.Common.Models.Services
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    return new Response<EmployeeResponse>
+                    return new Response
                     {
                         IsSuccess = false,
                         Message = result,
@@ -87,7 +88,7 @@ namespace VLegalizer.Common.Models.Services
                 }
 
                 EmployeeResponse trip = JsonConvert.DeserializeObject<EmployeeResponse>(result);
-                return new Response<EmployeeResponse>
+                return new Response
                 {
                     IsSuccess = true,
                     Result = trip
@@ -95,7 +96,7 @@ namespace VLegalizer.Common.Models.Services
             }
             catch (Exception ex)
             {
-                return new Response<EmployeeResponse>
+                return new Response
                 {
                     IsSuccess = false,
                     Message = ex.Message
@@ -103,7 +104,7 @@ namespace VLegalizer.Common.Models.Services
             }
         }
 
-        public async Task<Response<object>> RegisterUserAsync(
+        public async Task<Response> RegisterUserAsync(
             string urlBase,
             string servicePrefix,
             string controller,
@@ -121,12 +122,12 @@ namespace VLegalizer.Common.Models.Services
                 string url = $"{urlBase}{servicePrefix}{controller}";
                 HttpResponseMessage response = await client.PostAsync(url, content);
                 string answer = await response.Content.ReadAsStringAsync();
-                Response<object> obj = JsonConvert.DeserializeObject<Response<object>>(answer);
+                Response obj = JsonConvert.DeserializeObject<Response>(answer);
                 return obj;
             }
             catch (Exception ex)
             {
-                return new Response<object>
+                return new Response
                 {
                     IsSuccess = false,
                     Message = ex.Message,
@@ -136,7 +137,7 @@ namespace VLegalizer.Common.Models.Services
 
 
 
-        public async Task<Response<object>> RecoverPasswordAsync(
+        public async Task<Response> RecoverPasswordAsync(
             string urlBase,
             string servicePrefix,
             string controller,
@@ -154,12 +155,12 @@ namespace VLegalizer.Common.Models.Services
                 string url = $"{urlBase}{servicePrefix}{controller}";
                 HttpResponseMessage response = await client.PostAsync(url, content);
                 string answer = await response.Content.ReadAsStringAsync();
-                Response<object> obj = JsonConvert.DeserializeObject<Response<object>>(answer);
+                Response obj = JsonConvert.DeserializeObject<Response>(answer);
                 return obj;
             }
             catch (Exception ex)
             {
-                return new Response<object>
+                return new Response
                 {
                     IsSuccess = false,
                     Message = ex.Message,
@@ -168,7 +169,7 @@ namespace VLegalizer.Common.Models.Services
 
         }
 
-        public async Task<Response<object>> PutAsync<T>(
+        public async Task<Response> PutAsync<T>(
             string urlBase,
             string servicePrefix,
             string controller,
@@ -191,7 +192,7 @@ namespace VLegalizer.Common.Models.Services
                 string answer = await response.Content.ReadAsStringAsync();
                 if (!response.IsSuccessStatusCode)
                 {
-                    return new Response<object>
+                    return new Response
                     {
                         IsSuccess = false,
                         Message = answer,
@@ -199,7 +200,7 @@ namespace VLegalizer.Common.Models.Services
                 }
 
                 T obj = JsonConvert.DeserializeObject<T>(answer);
-                return new Response<object>
+                return new Response
                 {
                     IsSuccess = true,
                     Result = obj,
@@ -207,10 +208,57 @@ namespace VLegalizer.Common.Models.Services
             }
             catch (Exception ex)
             {
-                return new Response<object>
+                return new Response
                 {
                     IsSuccess = false,
                     Message = ex.Message,
+                };
+            }
+        }
+
+
+        public async Task<Response> RegisterTripAsync<T>(
+            string urlBase,
+            string servicePrefix, 
+            string controller, 
+            T model,
+            string tokenType, 
+            string accessToken)
+        {
+            try
+            {
+                string request = JsonConvert.SerializeObject(model);
+                StringContent content = new StringContent(request, Encoding.UTF8, "application/json");
+                HttpClient client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+
+
+                string url = $"{urlBase}{servicePrefix}{controller}";
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                string answer = await response.Content.ReadAsStringAsync();
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = answer
+                    };
+                }
+
+
+
+                Response obj = JsonConvert.DeserializeObject<Response>(answer);
+                return obj;
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
                 };
             }
         }

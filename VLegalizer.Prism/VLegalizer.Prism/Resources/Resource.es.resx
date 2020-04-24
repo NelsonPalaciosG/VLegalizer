@@ -258,4 +258,16 @@
   <data name="UserdontExist" xml:space="preserve">
     <value>EL usuario no existe</value>
   </data>
+  <data name="TripAdded" xml:space="preserve">
+    <value>Su viaje fue agregado con éxito</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>Fecha Final</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Fecha de inicial</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>Ciudad</value>
+  </data>
 </root>
