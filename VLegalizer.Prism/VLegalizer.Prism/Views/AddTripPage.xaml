@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:syncfusion="clr-namespace:Syncfusion.XForms.Pickers;assembly=Syncfusion.SfPicker.XForms"
              xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              xmlns:i18n="clr-namespace:VLegalizer.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
@@ -17,41 +18,24 @@
             	AbsoluteLayout.LayoutFlags="All"
             	Padding="10">
                 <StackLayout  VerticalOptions="StartAndExpand">
+                    <StackLayout>
+                        <syncfusion:SfDatePicker HeaderText="{i18n:Translate StartDate}"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <syncfusion:SfDatePicker HeaderText="{i18n:Translate EndDate}"/>
+                    </StackLayout>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
                         <Label
                     	Grid.Row="0"
                     	Grid.Column="0"
-                    	Text="{i18n:Translate StartDate}"
-                    	VerticalOptions="Center"/>
-                        <Entry
-                    	Grid.Row="0"
-                    	Grid.Column="1"
-                    	Placeholder="{i18n:Translate StartDate}"
-                    	Text="{Binding StarDate}"/>
-
-                        <Label
-                    	Grid.Row="1"
-                    	Grid.Column="0"
-                    	Text="{i18n:Translate EndDate}"
-                    	VerticalOptions="Center"/>
-                        <Entry
-                    	Grid.Row="1"
-                    	Grid.Column="1"
-                    	Placeholder="{i18n:Translate EndDate}"
-                    	Text="{Binding EndDate}"/>
-
-                        <Label
-                    	Grid.Row="2"
-                    	Grid.Column="0"
                     	Text="{i18n:Translate City}"
                     	VerticalOptions="Center"/>
                         <Entry
-                    	Grid.Row="2"
+                    	Grid.Row="0"
                     	Grid.Column="1"
                     	Placeholder="{i18n:Translate City}"
                     	Text="{Binding City}"/>
