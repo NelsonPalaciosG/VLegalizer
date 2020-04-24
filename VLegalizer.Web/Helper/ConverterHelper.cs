@@ -7,42 +7,18 @@ namespace VLegalizer.Web.Helper
 {
     public class ConverterHelper : IConverterHelper
     {
-        public TripResponse ToTripResponse(TripEntity tripEntity)
-         {
-             return new TripResponse
-             {
-                 Id = tripEntity.Id,
-                 StartDate = tripEntity.StartDate,
-                 EndDate = tripEntity.EndDate,
-                 City = tripEntity.City,
-                 TripDetails = tripEntity.TripDetails?.Select(td => new TripDetailResponse
-                 {
-                     Id = td.Id,
-                     Date = td.Date,
-                     Description = td.Description,
-                     Amount = td.Amount,
-                     PicturePath = td.PicturePath,
-                     IdExpenseType = td.ExpenseType.Id,
-                     ExpenseName = td.ExpenseType.ExpenseNames
 
-                 }).ToList(),
-                 Employee = ToEmployeeResponse(tripEntity.Employee)
-             };
 
-         }
+        public List<TripResponse> ToTripResponse(List<TripEntity> tripEntities)
+        {
+            List<TripResponse> list = new List<TripResponse>();
+            foreach (TripEntity tripEntity in tripEntities)
+            {
+                list.Add(ToTripResponse(tripEntity));
+            }
 
-        /* public List<TripResponse> ToTripResponse(List<TripEntity> tripEntity)
-         {
-             return tripEntity.Select(t => new TripResponse
-             {
-                 Id = t.Id,
-                 StartDate = t.StartDate,
-                 EndDate = t.EndDate,
-                 City = t.City,
-
-                 Employee = ToEmployeeResponse(t.Employee)
-             }).ToList();
-         }*/
+            return list;
+        }
 
         public EmployeeResponse ToEmployeeResponse(EmployeeEntity employee)
         {
@@ -63,32 +39,56 @@ namespace VLegalizer.Web.Helper
             };
         }
 
-
-        public List<TripDetailResponse> ToTripDetailResponse(List<TripDetailEntity> tripEntity)
+        private ExpenseTypeResponse ToExpenseTypeResponse(ExpenseTypeEntity expenseType)
         {
-            throw new System.NotImplementedException();
+            if (expenseType == null)
+            {
+                return null;
+            }
+
+
+
+            return new ExpenseTypeResponse
+            {
+                Id = expenseType.Id,
+                ExpenseNames = expenseType.ExpenseNames
+            };
         }
 
-        public List<TripResponse> ToTripResponse(List<TripEntity> tripEntity)
+        public TripDetailResponse ToTripDetailResponse(TripDetailEntity tripDetailEntity)
         {
-            return tripEntity.Select(t => new TripResponse
-
+            return new TripDetailResponse
             {
-                Id = t.Id,
-                StartDate = t.StartDate,
-                EndDate = t.EndDate,
-                City = t.City,
-                Employee = ToEmployeeResponse(t.Employee),
-                TripDetails = t.TripDetails.Select(td => new TripDetailResponse
+                Id = tripDetailEntity.Id,
+                Date = tripDetailEntity.Date,
+                Amount = tripDetailEntity.Amount,
+                Description = tripDetailEntity.Description,
+                PicturePath = tripDetailEntity.PicturePath,
+                ExpenseType = ToExpenseTypeResponse(tripDetailEntity.ExpenseType)
+            };
+        }
+
+        public TripResponse ToTripResponse(TripEntity tripEntity)
+        {
+            return new TripResponse
+            {
+                Id = tripEntity.Id,
+                City = tripEntity.City,
+                StartDate = tripEntity.StartDate,
+                EndDate = tripEntity.EndDate,
+                Employee = ToEmployeeResponse(tripEntity.Employee),
+                TripDetails = tripEntity.TripDetails?.Select(td => new TripDetailResponse
                 {
-                    Date = td.Date,
                     Id = td.Id,
+                    Date = td.Date,
                     Amount = td.Amount,
                     PicturePath = td.PicturePath,
-                    IdExpenseType = td.ExpenseType.Id
+                    Description = td.Description,
+                    ExpenseType = ToExpenseTypeResponse(td.ExpenseType),
                 }).ToList()
-            }).ToList();
+            };
         }
+
     }
 
 }

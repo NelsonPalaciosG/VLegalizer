@@ -5,7 +5,7 @@ namespace VLegalizer.Common.Models
 {
     public class EmployeeResponse
     {
-        public string EmployeeId { get; set; }
+        public string Id { get; set; }
 
         public string Document { get; set; }
 

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VLegalizer.Common.Models;
@@ -36,48 +37,16 @@ namespace VLegalizer.Web.Controllers.API
         [Route("GetTripByEmail")]
         public async Task<IActionResult> GetTrip([FromBody]EmailRequest emailRequest)
         {
-            {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest();
-                }
+            List<TripEntity> trips = await _context.Trips
+                .Include(tp => tp.TripDetails)
+                .ThenInclude(tp => tp.ExpenseType)
+                .Include(tp => tp.Employee)
+                .OrderByDescending(tp => tp.Id)
+                .ToListAsync();
 
-                var EmployeeEntity = await _context.Employees
-                    .Include(t => t.Trips)
-                    .ThenInclude(td => td.TripDetails)
-                    .ThenInclude(e => e.ExpenseType)
-                    .FirstOrDefaultAsync(t => t.Email.ToLower() == emailRequest.Email.ToLower());
 
-                var response = new EmployeeResponse
-                {
-                    Document = EmployeeEntity.Document,
-                    FirstName = EmployeeEntity.FirstName,
-                    LastName = EmployeeEntity.LastName,
-                    FixedPhone = EmployeeEntity.FixedPhone,
-                    CellPhone = EmployeeEntity.CellPhone,
-                    Address = EmployeeEntity.Address,
-                    UserType = EmployeeEntity.UserType,
-                    Trips = EmployeeEntity.Trips?.Select(t => new TripResponse
-                    {
-                        Id = t.Id,
-                        StartDate = t.StartDate,
-                        EndDate = t.EndDate,
-                        City = t.City,
-                        TripDetails = t.TripDetails.Select(td => new TripDetailResponse
-                        {
-                            Id = td.Id,
-                            Date = td.Date,
-                            Amount = td.Amount,
-                            Description = td.Description,
-                            PicturePath = td.ImageFullPath,
-                            IdExpenseType = td.ExpenseType.Id,
-                            ExpenseName = td.ExpenseType.ExpenseNames
-                        }).ToList()
-                    }).ToList(),
-                };
 
-                return Ok(response);
-            }
+            return Ok(_converterHelper.ToTripResponse(trips));
         }
 
         private bool TripEntityExists(int id)
@@ -101,7 +70,7 @@ namespace VLegalizer.Web.Controllers.API
             }
 
 
-            EmployeeEntity employeeEntity = await _userHelper.GetUserAsync(request.Email);
+            EmployeeEntity employeeEntity = await _userHelper.GetUserAsync(request.EmployeeId);
             if (employeeEntity == null)
             {
                 return BadRequest(Resource.UserdontExist);

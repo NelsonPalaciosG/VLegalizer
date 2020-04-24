@@ -7,6 +7,10 @@
   <ItemGroup>
     <Compile Remove="Migrations\20200415061608_modify employeeentity.cs" />
     <Compile Remove="Migrations\20200415061608_modify employeeentity.Designer.cs" />
+    <Compile Remove="Migrations\20200424081453_changes in relatonships.cs" />
+    <Compile Remove="Migrations\20200424081453_changes in relatonships.Designer.cs" />
+    <Compile Remove="Migrations\20200424085739_add-migration.cs" />
+    <Compile Remove="Migrations\20200424085739_add-migration.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
