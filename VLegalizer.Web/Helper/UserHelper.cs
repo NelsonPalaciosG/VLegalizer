@@ -111,6 +111,11 @@ namespace VLegalizer.Web.Helper
             return await _employeeManager.FindByIdAsync(employeeId.ToString());
         }
 
+        public async Task<EmployeeEntity> GetUserAsync(string email)
+        {
+            return await _employeeManager.FindByEmailAsync(email);
+        }
+
         public async Task<IdentityResult> ResetPasswordAsync(EmployeeEntity user, string token, string password)
         {
             return await _employeeManager.ResetPasswordAsync(user, token, password);

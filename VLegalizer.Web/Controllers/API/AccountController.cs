@@ -42,7 +42,7 @@ namespace VLegalizer.Web.Controllers.API
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(new Response<object>
+                return BadRequest(new Response<EmployeeResponse>
                 {
                     IsSuccess = false,
                     Message = "Bad request"
@@ -52,7 +52,7 @@ namespace VLegalizer.Web.Controllers.API
             EmployeeEntity employee = await _userHelper.GetUserByEmailAsync(request.Email);
             if (employee != null)
             {
-                return BadRequest(new Response<object>
+                return BadRequest(new Response<EmployeeResponse>
                 {
                     IsSuccess = false,
                     Message = Resource.Email_exist
@@ -182,24 +182,24 @@ namespace VLegalizer.Web.Controllers.API
 
 
 
-            var employeeEntity = await _userHelper.GetUserByEmailAsync(request.Email);
+            var employeeEntity = await _userHelper.GetUserAsync(request.Email);
             if (employeeEntity == null)
             {
                 return BadRequest("User not found.");
             }
 
 
-
             employeeEntity.FirstName = request.FirstName;
             employeeEntity.LastName = request.LastName;
             employeeEntity.Address = request.Address;
+            employeeEntity.Email = request.Email;
             employeeEntity.FixedPhone = request.FixedPhone;
             employeeEntity.CellPhone = request.CellPhone;
             employeeEntity.Document = request.Document;
 
 
+            IdentityResult respose = await _userHelper.UpdateUserAsync(employeeEntity);
 
-            var respose = await _userHelper.UpdateUserAsync(employeeEntity);
             if (!respose.Succeeded)
             {
                 return BadRequest(respose.Errors.FirstOrDefault().Description);
@@ -207,7 +207,7 @@ namespace VLegalizer.Web.Controllers.API
 
 
 
-            var updatedEmployee = await _userHelper.GetUserByEmailAsync(request.Email);
+            EmployeeEntity updatedEmployee = await _userHelper.GetUserAsync(request.Email);
             return Ok(updatedEmployee);
         }
 

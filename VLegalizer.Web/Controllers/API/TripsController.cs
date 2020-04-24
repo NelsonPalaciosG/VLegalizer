@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using VLegalizer.Common.Models;
+using VLegalizer.Prism.Resources;
 using VLegalizer.Web.Data;
 using VLegalizer.Web.Data.Entities;
 using VLegalizer.Web.Helper;
@@ -18,12 +20,15 @@ namespace VLegalizer.Web.Controllers.API
     {
         private readonly DataContext _context;
         private readonly IConverterHelper _converterHelper;
+        private readonly IUserHelper _userHelper;
 
         public TripsController(DataContext context,
-               IConverterHelper converterHelper)
+               IConverterHelper converterHelper,
+                IUserHelper userHelper)
         {
             _context = context;
             _converterHelper = converterHelper;
+            _userHelper = userHelper;
 
         }
 
@@ -190,5 +195,58 @@ namespace VLegalizer.Web.Controllers.API
         {
             return _context.Trips.Any(e => e.Id == id);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> PostTrips([FromBody] TripRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new Response<object>
+                {
+                    IsSuccess = false,
+                    Message = "Bad request",
+                    Result = ModelState
+                });
+            }
+
+
+            EmployeeEntity employeeEntity = await _userHelper.GetUserAsync(request.EmployeeId);
+            if (employeeEntity == null)
+            {
+                return BadRequest(Resource.UserdontExist);
+            }
+
+
+
+
+            TripEntity tripEntity = new TripEntity
+            {
+                StartDate = request.StartDate,
+                EndDate = request.EndDate,
+                City = request.City,
+                Employee = employeeEntity
+            };
+
+
+
+            _context.Trips.Add(tripEntity);
+            try
+            {
+                await _context.SaveChangesAsync();
+
+
+
+            }
+
+            catch (Exception ex)
+            {
+                ex.ToString();
+            }
+
+
+
+            return Ok(_converterHelper.ToTripResponse(tripEntity));
+        }
+
     }
 }

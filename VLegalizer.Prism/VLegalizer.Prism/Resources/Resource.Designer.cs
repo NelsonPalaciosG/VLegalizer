@@ -124,6 +124,15 @@ namespace VLegalizer.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change password.
+        /// </summary>
+        public static string ChangePassword {
+            get {
+                return ResourceManager.GetString("ChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Document.
         /// </summary>
         public static string Document {
@@ -439,11 +448,29 @@ namespace VLegalizer.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User updated sucessfully.
+        /// </summary>
+        public static string UpdateSucess {
+            get {
+                return ResourceManager.GetString("UpdateSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Updating.
         /// </summary>
         public static string Updating {
             get {
                 return ResourceManager.GetString("Updating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User does not exist.
+        /// </summary>
+        public static string UserdontExist {
+            get {
+                return ResourceManager.GetString("UserdontExist", resourceCulture);
             }
         }
         

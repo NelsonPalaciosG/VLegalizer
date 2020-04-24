@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -18,16 +17,16 @@ namespace VLegalizer.Common.Models.Services
         {
             try
             {
-                var requestString = JsonConvert.SerializeObject(request);
-                var content = new StringContent(requestString, Encoding.UTF8, "application/json");
-                var client = new HttpClient
+                string requestString = JsonConvert.SerializeObject(request);
+                StringContent content = new StringContent(requestString, Encoding.UTF8, "application/json");
+                HttpClient client = new HttpClient
                 {
                     BaseAddress = new Uri(urlBase)
                 };
 
-                var url = $"{servicePrefix}{controller}";
-                var response = await client.PostAsync(url, content);
-                var result = await response.Content.ReadAsStringAsync();
+                string url = $"{servicePrefix}{controller}";
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                string result = await response.Content.ReadAsStringAsync();
 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -38,7 +37,7 @@ namespace VLegalizer.Common.Models.Services
                     };
                 }
 
-                var token = JsonConvert.DeserializeObject<TokenResponse>(result);
+                TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(result);
                 return new Response<TokenResponse>
                 {
                     IsSuccess = true,
@@ -65,18 +64,18 @@ namespace VLegalizer.Common.Models.Services
         {
             try
             {
-                var request = new EmailRequest { Email = email };
-                var requestString = JsonConvert.SerializeObject(request);
-                var content = new StringContent(requestString, Encoding.UTF8, "application/json");
-                var client = new HttpClient
+                EmailRequest request = new EmailRequest { Email = email };
+                string requestString = JsonConvert.SerializeObject(request);
+                StringContent content = new StringContent(requestString, Encoding.UTF8, "application/json");
+                HttpClient client = new HttpClient
                 {
                     BaseAddress = new Uri(urlBase)
                 };
 
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenType, accessToken);
-                var url = $"{urlBase}{servicePrefix}{controller}";
-                var response = await client.PostAsync(url, content);
-                var result = await response.Content.ReadAsStringAsync();
+                string url = $"{urlBase}{servicePrefix}{controller}";
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                string result = await response.Content.ReadAsStringAsync();
 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -87,7 +86,7 @@ namespace VLegalizer.Common.Models.Services
                     };
                 }
 
-                var trip = JsonConvert.DeserializeObject<EmployeeResponse>(result);
+                EmployeeResponse trip = JsonConvert.DeserializeObject<EmployeeResponse>(result);
                 return new Response<EmployeeResponse>
                 {
                     IsSuccess = true,
@@ -112,17 +111,17 @@ namespace VLegalizer.Common.Models.Services
         {
             try
             {
-                var request = JsonConvert.SerializeObject(employeeRequest);
-                var content = new StringContent(request, Encoding.UTF8, "application/json");
-                var client = new HttpClient
+                string request = JsonConvert.SerializeObject(employeeRequest);
+                StringContent content = new StringContent(request, Encoding.UTF8, "application/json");
+                HttpClient client = new HttpClient
                 {
                     BaseAddress = new Uri(urlBase)
                 };
 
-                var url = $"{urlBase}{servicePrefix}{controller}";
-                var response = await client.PostAsync(url, content);
-                var answer = await response.Content.ReadAsStringAsync();
-                var obj = JsonConvert.DeserializeObject<Response<object>>(answer);
+                string url = $"{urlBase}{servicePrefix}{controller}";
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                string answer = await response.Content.ReadAsStringAsync();
+                Response<object> obj = JsonConvert.DeserializeObject<Response<object>>(answer);
                 return obj;
             }
             catch (Exception ex)
@@ -145,17 +144,17 @@ namespace VLegalizer.Common.Models.Services
         {
             try
             {
-                var request = JsonConvert.SerializeObject(emailRequest);
-                var content = new StringContent(request, Encoding.UTF8, "application/json");
-                var client = new HttpClient
+                string request = JsonConvert.SerializeObject(emailRequest);
+                StringContent content = new StringContent(request, Encoding.UTF8, "application/json");
+                HttpClient client = new HttpClient
                 {
                     BaseAddress = new Uri(urlBase)
                 };
 
-                var url = $"{urlBase}{servicePrefix}{controller}";
-                var response = await client.PostAsync(url, content);
-                var answer = await response.Content.ReadAsStringAsync();
-                var obj = JsonConvert.DeserializeObject<Response<object>>(answer);
+                string url = $"{urlBase}{servicePrefix}{controller}";
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                string answer = await response.Content.ReadAsStringAsync();
+                Response<object> obj = JsonConvert.DeserializeObject<Response<object>>(answer);
                 return obj;
             }
             catch (Exception ex)
@@ -166,6 +165,55 @@ namespace VLegalizer.Common.Models.Services
                     Message = ex.Message,
                 };
             }
+
         }
+
+        public async Task<Response<object>> PutAsync<T>(
+            string urlBase,
+            string servicePrefix,
+            string controller,
+            T model,
+            string tokenType,
+            string accessToken)
+        {
+            try
+            {
+                string request = JsonConvert.SerializeObject(model);
+                StringContent content = new StringContent(request, Encoding.UTF8, "application/json");
+                HttpClient client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenType, accessToken);
+                string url = $"{urlBase}{servicePrefix}{controller}";
+                HttpResponseMessage response = await client.PutAsync(url, content);
+                string answer = await response.Content.ReadAsStringAsync();
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response<object>
+                    {
+                        IsSuccess = false,
+                        Message = answer,
+                    };
+                }
+
+                T obj = JsonConvert.DeserializeObject<T>(answer);
+                return new Response<object>
+                {
+                    IsSuccess = true,
+                    Result = obj,
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response<object>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message,
+                };
+            }
+        }
+
     }
 }

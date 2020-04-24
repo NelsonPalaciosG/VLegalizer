@@ -9,15 +9,15 @@
              BackgroundColor="{StaticResource ColorBackgroud}"
              Title="{Binding Title}">
 
-
-    <AbsoluteLayout Padding="2">
+    <ScrollView>
 
         <AbsoluteLayout>
             <StackLayout
 
             	AbsoluteLayout.LayoutBounds="0,0,1,1"
             	AbsoluteLayout.LayoutFlags="All"
-            	Padding="5">
+            	Padding="10">
+            <StackLayout  VerticalOptions="StartAndExpand">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -33,7 +33,7 @@
                     	Grid.Row="0"
                     	Grid.Column="1"
                     	Placeholder="{i18n:Translate Document2}"
-                    	Text="{Binding Document}"/>
+                    	Text="{Binding Employee.Document}"/>
 
                     <Label
                     	Grid.Row="1"
@@ -44,7 +44,7 @@
                     	Grid.Row="1"
                     	Grid.Column="1"
                     	Placeholder="{i18n:Translate FirstName2}"
-                    	Text="{Binding FirstName}"/>
+                    	Text="{Binding Employee.FirstName}"/>
 
                     <Label
                     	Grid.Row="2"
@@ -55,7 +55,7 @@
                     	Grid.Row="2"
                     	Grid.Column="1"
                     	Placeholder="{i18n:Translate LastName2}"
-                    	Text="{Binding LastName}"/>
+                    	Text="{Binding Employee.LastName}"/>
 
                     <Label
                     	Grid.Row="3"
@@ -66,68 +66,50 @@
                     	Grid.Row="3"
                     	Grid.Column="1"
                     	Placeholder="{i18n:Translate Address2}"
-                    	Text="{Binding Address}"/>
+                    	Text="{Binding Employee.Address}"/>
 
                     <Label
                     	Grid.Row="4"
-                    	Grid.Column="0"
-                    	Text="{i18n:Translate Email}"
-                    	VerticalOptions="Center"/>
-                    <Entry
-                    	Grid.Row="4"
-                    	Grid.Column="1"
-                    	Keyboard="Email"
-                    	Placeholder="{i18n:Translate Email2}"
-                    	Text="{Binding Email}"/>
-
-                    <Label
-                    	Grid.Row="5"
                     	Grid.Column="0"
                     	Text="{i18n:Translate FixedPhone}"
                     	VerticalOptions="Center"/>
                     <Entry
-                    	Grid.Row="5"
+                    	Grid.Row="4"
                     	Grid.Column="1"
                     	Placeholder="{i18n:Translate FixedPhone2}"
-                    	Text="{Binding FixedPhone}"/>
+                    	Text="{Binding Employee.FixedPhone}"/>
                     <Label
-                    	Grid.Row="6"
+                    	Grid.Row="5"
                     	Grid.Column="0"
                     	Text="{i18n:Translate CellPhone}"
                     	VerticalOptions="Center"/>
-                    <Entry
-                    	Grid.Row="6"
+                        <Entry
+                    	Grid.Row="5"
                     	Grid.Column="1"
                     	Placeholder="{i18n:Translate FixedPhone2}"
-                    	Text="{Binding CellPhone}"/>
-                    <Label
-                    	Grid.Row="7"
+                    	Text="{Binding Employee.CellPhone}"/>
+                        <Label
+                    	Grid.Row="6"
                     	Grid.Column="0"
-                    	Text="{i18n:Translate Password}"
+                    	Text="{i18n:Translate Email}"
                     	VerticalOptions="Center"/>
-                    <Entry
-                    	Grid.Row="7"
+                        <Entry
+                    	Grid.Row="6"
                     	Grid.Column="1"
-                    	IsPassword="True"
-                    	Placeholder="{i18n:Translate Password2}"
-                    	Text="{Binding Password}"/>
-
-                    <Label
-                    	Grid.Row="8"
-                    	Grid.Column="0"
-                    	Text="{i18n:Translate PasswordConfirm}"
-                    	VerticalOptions="Center"/>
-                    <Entry
-                    	Grid.Row="8"
-                    	Grid.Column="1"
-                    	IsPassword="True"
-                    	Placeholder="{i18n:Translate PasswordConfirm2}"
-                    	Text="{Binding PasswordConfirm}"/>
-                </Grid>
-                <Button
-                	Command="{Binding UpdateCommand}"
+                    	Placeholder="{i18n:Translate Email}"
+                    	Text="{Binding Employee.Email}"/>
+                    </Grid>
+            </StackLayout>
+            <Button
+                	Command="{Binding SaveCommand}"
                 	IsEnabled="{Binding IsEnabled}"
                 	Text="{i18n:Translate Update}"/>
+            <Button
+                	Command="{Binding ChangePasswordCommand}"
+                	IsEnabled="{Binding IsEnabled}"
+                	Text="{i18n:Translate ChangePassword}"
+                    Style="{StaticResource SecondaryButton}"/>
+
             </StackLayout>
             <busyindicator:SfBusyIndicator AnimationType="Globe" 
                                        AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
@@ -135,11 +117,12 @@
                 	                   HorizontalOptions="Center"
                                        BackgroundColor="{StaticResource ColorSecondary}"
                                        TextColor="{StaticResource ColorFontInverse}"
-                                       Title="{i18n:Translate Update}"
+                                       Title="{i18n:Translate Updating}"
                 	                   IsVisible="{Binding IsRunning}"
                 	                   VerticalOptions="Center"
                 	                   ViewBoxWidth="80"
                 	                   ViewBoxHeight="80" />
+
         </AbsoluteLayout>
-    </AbsoluteLayout>
+    </ScrollView>
 </ContentPage>

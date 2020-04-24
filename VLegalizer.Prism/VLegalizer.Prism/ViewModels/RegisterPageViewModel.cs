@@ -128,7 +128,7 @@ namespace VLegalizer.Prism.ViewModels
                 return false;
             }
 
-            if (string.IsNullOrEmpty(Email) || !RegexHelper.IsValidEmail(Email))
+            if (string.IsNullOrEmpty(Email))
             {
                 await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.Enter_email, Languages.Accept);
                 return false;

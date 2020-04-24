@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace VLegalizer.Web.Data.Entities
@@ -28,7 +29,7 @@ namespace VLegalizer.Web.Data.Entities
         public ExpenseTypeEntity ExpenseType { get; set; }
         //TODO: replace the correct URL for the image
         public string ImageFullPath => string.IsNullOrEmpty(PicturePath)
-            ? null
+            ? "https://vlegalizerwebpalaciosgal.azurewebsites.net//images//Expenses/Alojamiento.jpg"
             : $"https://TDB.azurewebsites.net{PicturePath.Substring(1)}";
     }
 }

@@ -249,4 +249,13 @@
   <data name="Update" xml:space="preserve">
     <value>Aktualisieren</value>
   </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Kennwort ändern</value>
+  </data>
+  <data name="UpdateSucess" xml:space="preserve">
+    <value>Erfolgreich aktualisiert</value>
+  </data>
+  <data name="UserdontExist" xml:space="preserve">
+    <value>Benutzer ist nicht vorhanden</value>
+  </data>
 </root>

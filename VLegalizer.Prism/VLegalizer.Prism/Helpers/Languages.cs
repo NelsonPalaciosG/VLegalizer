@@ -105,6 +105,13 @@ namespace VLegalizer.Prism.Helpers
         public static string Updating => Resource.Updating;
 
         public static string Update => Resource.Update;
+
+        public static string ChangePassword => Resource.ChangePassword;
+
+        public static string UpdateSucess => Resource.UpdateSucess;
+
+        public static string UserdontExist => Resource.UserdontExist;
+
     }
 
 }

@@ -138,6 +138,9 @@
   <data name="CellPhone" xml:space="preserve">
     <value>Cell Phone</value>
   </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
   <data name="Document" xml:space="preserve">
     <value>Document</value>
   </data>
@@ -243,8 +246,14 @@
   <data name="Update" xml:space="preserve">
     <value>Update</value>
   </data>
+  <data name="UpdateSucess" xml:space="preserve">
+    <value>User updated sucessfully</value>
+  </data>
   <data name="Updating" xml:space="preserve">
     <value>Updating</value>
+  </data>
+  <data name="UserdontExist" xml:space="preserve">
+    <value>User does not exist</value>
   </data>
   <data name="ValidEmail" xml:space="preserve">
     <value>You must enter a valid email</value>

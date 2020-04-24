@@ -12,6 +12,8 @@ namespace VLegalizer.Web.Helper
 
         Task<EmployeeEntity> GetUserAsync(Guid employeeId);
 
+        Task<EmployeeEntity> GetUserAsync(string email);
+
         Task<IdentityResult> AddUserAsync(EmployeeEntity user, string password);
 
         Task CheckRoleAsync(string roleName);

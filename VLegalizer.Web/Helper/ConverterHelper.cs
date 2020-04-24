@@ -7,7 +7,7 @@ namespace VLegalizer.Web.Helper
 {
     public class ConverterHelper : IConverterHelper
     {
-        /*public TripResponse ToTripResponse(TripEntity tripEntity)
+        public TripResponse ToTripResponse(TripEntity tripEntity)
          {
              return new TripResponse
              {
@@ -22,12 +22,14 @@ namespace VLegalizer.Web.Helper
                      Description = td.Description,
                      Amount = td.Amount,
                      PicturePath = td.PicturePath,
-                     ExpenseType = td.ExpenseType.ExpenseNames
+                     IdExpenseType = td.ExpenseType.Id,
+                     ExpenseName = td.ExpenseType.ExpenseNames
+
                  }).ToList(),
                  Employee = ToEmployeeResponse(tripEntity.Employee)
              };
 
-         }*/
+         }
 
         /* public List<TripResponse> ToTripResponse(List<TripEntity> tripEntity)
          {
