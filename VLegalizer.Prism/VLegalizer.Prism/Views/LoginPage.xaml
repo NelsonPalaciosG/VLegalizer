@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
              xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              xmlns:i18n="clr-namespace:VLegalizer.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
@@ -17,32 +18,28 @@
                    Margin="0,20,0,5"
                    Source="VLegalizer_logo"/>
             <StackLayout  VerticalOptions="CenterAndExpand">
-                <Grid Margin="20">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="3*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" 
-                           Grid.Row="0"
-                           HorizontalTextAlignment="End"
-                           Text="{i18n:Translate Email}"
-                           VerticalOptions="Center"/>
-                    <Entry Grid.Column="1"
-                           Grid.Row="0"
-                           Keyboard="Email"
-                           Placeholder="{i18n:Translate Email2}"
-                           Text="{Binding Email}"/>
-                    <Label Grid.Column="0" 
-                           Grid.Row="1"
-                           HorizontalTextAlignment="End"
-                           Text="{i18n:Translate Password}"
-                           VerticalOptions="Center"/>
-                    <Entry Grid.Column="1"
-                           Grid.Row="1"
-                           IsPassword="True"
-                           Placeholder="{i18n:Translate Password2}"
-                           Text="{Binding Password}"/>
-                </Grid>
+                <StackLayout  VerticalOptions="CenterAndExpand">
+                    <inputLayout:SfTextInputLayout 
+                        Hint="{i18n:Translate Email}"  
+                        FocusedColor="{StaticResource ColorAccent}"   
+                       HelperText="{i18n:Translate Email2}" >
+                        <Entry Margin="30, 0, 0, 30" Text="{Binding Email}"
+                               HorizontalTextAlignment="End"/>
+                    </inputLayout:SfTextInputLayout>
+                </StackLayout>
+                <StackLayout  VerticalOptions="CenterAndExpand">
+                    <inputLayout:SfTextInputLayout 
+                        Hint="{i18n:Translate Password}"  
+                        FocusedColor="{StaticResource ColorAccent}"   
+                        EnablePasswordVisibilityToggle="True"  
+                        ErrorText="{i18n:Translate Password}"
+                        ShowCharCount="True"
+                        CharMaxLength="6">
+                        <Entry Text="{Binding Password}"
+                               HorizontalTextAlignment="End"/>
+                    </inputLayout:SfTextInputLayout>
+                </StackLayout>
+
                 <StackLayout
                        HorizontalOptions="Center"
                        Orientation="Horizontal">
